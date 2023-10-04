@@ -1,8 +1,17 @@
 const express = require('express')
 const app = express()
 const port = 8000
+require('dotenv').config();
+const dbConnection = require("./databaseConnection");
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+
+// wrrite routes here and call fucntions from dbconnections
+
+app.listen(process.env.PORT, () => 
+{
+    console.log(`Listening on port ${port}`)
+    dbConnection.run()
+});
 
 
 // control c to stop
