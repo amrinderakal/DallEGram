@@ -57,10 +57,8 @@ export default function LoginPage() {
           </div>
 
           <div className="d-flex align-items-center justify-content-center w-100">
-            <i><h4>Bring Your Words to Life</h4></i>
+            <i><h4>Bring Your Words To Life With AI</h4></i>
           </div>
-
-          {/* why isn't my commit working */}
 
           <Form.Group id="username" className=" mb-4">
           
