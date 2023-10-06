@@ -7,7 +7,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function CreateUser() {
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { resetPassword} = useAuth(); // change
@@ -57,6 +56,10 @@ export default function CreateUser() {
             <h1>Reset Your Password</h1>
           </div>
 
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <h5>Check Your Email to Set a New Password</h5>
+          </div>
+
           <Form.Group id="username" className=" mb-4"> {/* email or username? */}
             <FloatingLabel controlId="floatingInput" label="Email">
               <Form.Control
@@ -70,19 +73,6 @@ export default function CreateUser() {
             </FloatingLabel>
           </Form.Group>
 
-          <Form.Group id="password" className="mb-4">
-            <FloatingLabel controlId="floatingInput" label="New Password">
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ borderColor: '#F3CEB1' }}
-                placeholder="New Password"
-              />
-            </FloatingLabel>
-          </Form.Group>
-
           <Button
             disabled={loading}
             variant="primary"
@@ -90,7 +80,7 @@ export default function CreateUser() {
             type="submit"
             onClick={() => handleSubmit()}
           >
-            Reset Your Password
+            Submit
           </Button>
 
           <div className="w-100 text-center mt-3">
