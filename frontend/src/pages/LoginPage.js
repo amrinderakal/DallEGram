@@ -57,7 +57,7 @@ export default function LoginPage() {
           </div>
 
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h4><i>Bring Your Words to Life</i></h4>
+            <i><h4>Bring Your Words to Life</h4></i>
           </div>
 
           <Form.Group id="username" className=" mb-4">
