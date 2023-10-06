@@ -57,7 +57,7 @@ export default function CreateUser() {
           </div>
 
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h5>Check Your Email to Set a New Password</h5>
+            <h5>We'll Send You an Email</h5>
           </div>
 
           <Form.Group id="username" className=" mb-4"> {/* email or username? */}
