@@ -11,15 +11,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login , signup} = useAuth();
+  const { login } = useAuth();
   async function handleSubmit(e) {
     // e.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
-      console.log("sucessful");
+      await login(email, password);
+      console.log("successful");
     } catch (err) {
       console.log(err);
       setError(err);
@@ -52,16 +52,20 @@ export default function LoginPage() {
           </div>
           {error && <Alert variant="danger">{error}</Alert>}
 
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <h1>Welcome to DallEGram</h1>
+          </div>
+
           <Form.Group id="username" className=" mb-4">
           
-            <FloatingLabel controlId="floatingInput" label="Username">
+            <FloatingLabel controlId="floatingInput" label="Email">
               <Form.Control
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 style={{ borderColor: '#F3CEB1' }}
-                placeholder="Username"
+                placeholder="Email"
               />
             </FloatingLabel>
           </Form.Group>
@@ -84,7 +88,7 @@ export default function LoginPage() {
             variant="primary"
             className="w-100"
             type="submit"
-            onClick={() => handleSubmit()}
+            onClick={() => handleSubmit()} 
           >
             Login
           </Button>
