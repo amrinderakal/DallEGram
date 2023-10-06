@@ -56,6 +56,10 @@ export default function LoginPage() {
             <h1>Welcome to DallEGram</h1>
           </div>
 
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <h4><i>Bring Your Words to Life</i></h4>
+          </div>
+
           <Form.Group id="username" className=" mb-4">
           
             <FloatingLabel controlId="floatingInput" label="Email">
