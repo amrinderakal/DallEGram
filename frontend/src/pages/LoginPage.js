@@ -13,14 +13,14 @@ export default function LoginPage() {
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login , signup} = useAuth();
+  const { login } = useAuth();
   async function handleSubmit(e) {
     // e.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await login(email, password);
       console.log("sucessful");
     } catch (err) {
       console.log(err);
