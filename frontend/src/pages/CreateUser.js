@@ -4,26 +4,46 @@ import {
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import { useDatabase } from '../context/DatabaseContext';
+
+
+
 
 export default function CreateUser() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signup} = useAuth(); 
-
+  const { signup, login, uid} = useAuth(); 
+  const { addUser} = useDatabase();
+  
+  const createErrorResponse = ((err)=>{
+  const res = err.code
+  switch(res) {
+  case "auth/weak-password":
+    setError("Password should be at least 6 characters")
+    break;
+  case "auth/email-already-in-use":
+    setError("Account with this email already in use")
+    break;
+  default:
+     setError(JSON.stringify(err))
+}
+})
   async function handleSubmit(e) {
-    // e.preventDefault();
+    //e.preventDefault();
     try {
-      setError("");
+     setError("");
       setLoading(true);
       await signup(email, password);
+      addUser(firstName, lastName, "", email)
       console.log("successful");
+      ///ROUTE TO A SUCCESS PAGE THAT TELLS USER TO LOGIN
     } catch (err) {
-      console.log(err);
-      setError(err);
+      console.log(err.code);
+      createErrorResponse(err)
     }
     setLoading(false);
   }

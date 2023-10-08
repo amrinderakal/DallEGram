@@ -23,7 +23,8 @@ export function AuthProvider({ children }) {
   const [uid, setUID] = useState(true);
 
   function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+     const signup =  createUserWithEmailAndPassword(auth, email, password);
+    return signup
   }
 
   function login(email, password) {
@@ -50,9 +51,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       if (user) {
-       // Come here to send UID to the dbcontext setEmail(user.email);
-       setUID(user.uid)
-      console.log(uid)
+        setUID(user.uid)
       }
       setLoading(false);
     });
@@ -66,7 +65,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     resetPassword,
-    uid
+    uid,
+  
     // updateEmail,
     // updatePassword,
   };

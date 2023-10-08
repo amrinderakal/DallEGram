@@ -12,8 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Router>
+      <AuthProvider>
       <DatabaseProvider>
-        <AuthProvider>
           <Routes>
            <Route path="/" element={<LoginPage/>} />
           <Route path="/create-user" element={<CreateUser/>} />
@@ -21,8 +21,8 @@ function App() {
           <Route path="/homepage" element={<Homepage/>} />
           <Route path="/profile" element={<Profile/>} />
         </Routes>
-        </AuthProvider>
         </DatabaseProvider>
+        </AuthProvider>
       </Router>
   );
 }

@@ -1,4 +1,4 @@
-
+// ALL CURRENT HTML NEEDS TO BE A ENTIRELY DIFF FUNCTIONAL COMONENT (NAV BAR and IMAGE GENERATION) FOR CLEANER CODE
 import React, { useState } from 'react';
 import {
   Form, Button, Alert, FloatingLabel, Container, Nav, Navbar, NavDropdown

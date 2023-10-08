@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
   Form, Button, Alert, FloatingLabel, Container,
 } from 'react-bootstrap';
-import {  Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { useDatabase } from '../context/DatabaseContext';
 
@@ -13,7 +13,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, uid } = useAuth();
+  const navigate = useNavigate()
+  const{updateUID} = useDatabase();
   async function handleSubmit(e) {
     // e.preventDefault();
 
@@ -21,10 +23,13 @@ export default function LoginPage() {
       setError("");
       setLoading(true);
       await login(email, password);
+      updateUID(email, uid)
       console.log("sucessful");
+      //NEED TO RETREIVE INFRO FROM BACKEND HERE
+      navigate("/homepage")
     } catch (err) {
       console.log(err);
-      setError(err);
+      setError("Incorrect Username or password");
     }
     setLoading(false);
   }
@@ -52,7 +57,7 @@ export default function LoginPage() {
           <div className="d-flex align-items-center justify-content-center w-100">
             {/* <img className="mb-4 w-100" src={logo} alt="" /> */}
           </div>
-          {error && <Alert variant="danger">{error}</Alert>}
+          {/* {error ? <Alert variant="danger">{error}</Alert>: console.log("no errors")} */}
 
           <div className="d-flex align-items-center justify-content-center w-100">
             <h1>Welcome to DallEGram</h1>
