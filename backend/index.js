@@ -39,7 +39,7 @@ app.put("/update_uid", (req, res) => {
 app.put("/add_image", (req, res) => {
   try{
       console.log(req.body)
-      dbConnection.addImageToUser( req.body.uid, req.body.imageID)
+      dbConnection.addImageToUser( req.body.uid, req.body.imageURL)
       res.status(201).send("Image Added");
   }catch{
        res.status(500).send('Server error');
@@ -66,7 +66,7 @@ app.post("/add_image_to_feed_collection", async (req, res) => {
   try{
     console.log(req.body)
     const imageID = await dbConnection.insertIntoFeedCollection(req.body.uid, req.body.imageURL, req.body.public)
-    res.send(imageID);
+    res.status(201).send("Image Added");
   }catch{
        res.status(500).send('Server error');
   }

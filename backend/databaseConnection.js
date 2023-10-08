@@ -14,11 +14,12 @@ async function insertOneUser(fName, lName, uid, email) {
     // Find the first document in the collection
     const insertedItem = await collection.insertOne(
       {
+        uid : uid,
         fName : fName,
         lName : lName,
-        uid : uid,
         email: email,
-        imageIDS:[]
+        imageURLS:[],
+        profilePic:""
       }
     )
     console.log(insertedItem);
@@ -29,7 +30,6 @@ async function insertOneUser(fName, lName, uid, email) {
 }
 
 async function insertIntoFeedCollection(uid, imageURL, public) {
-   const imageID = uuid.v4();
   try {
     await client.connect();
     const db = client.db('dallegram');
@@ -39,19 +39,19 @@ async function insertIntoFeedCollection(uid, imageURL, public) {
     const insertedItem = await collection.insertOne(
       {
         uid : uid,
-        imageURL :imageURL,
-        imageID : imageID,
+        imageURL:imageURL,
         public : public,
-        likes : 0
+        likes : 0,
+        caption: "",
+        timestamp: Date.now()
       }
     )
-    console.log(imageID);
+    console.log(insertedItem);
   } finally {
     // Close the database connection when finished or an error occurs
     await client.close();
   }
-  addImageToUser(uid, imageID)
-  return imageID
+  addImageToUser(uid, imageURL)
 }
 
 
@@ -80,13 +80,13 @@ async function updateUID(email, uid) {
 }
 
 
-async function addImageToUser(uid, imageID) {
+async function addImageToUser(uid, imageURL) {
   try {
     await client.connect();
     const db = client.db('dallegram');
     const collection = db.collection('user');
      const updatedItem = await collection.updateOne(
-   { uid: uid },{ $push: { imageIDS: imageID } }
+   { uid: uid },{ $push: { imageURLS: imageURL } }
    
 )
     // do something if there is not user
