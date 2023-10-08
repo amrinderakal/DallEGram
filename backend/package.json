@@ -19,7 +19,8 @@
     "firebase": "^10.4.0",
     "firebase-admin": "^11.11.0",
     "mongodb": "^6.1.0",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
