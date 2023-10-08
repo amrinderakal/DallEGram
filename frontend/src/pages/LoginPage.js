@@ -13,19 +13,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login , uid} = useAuth();
-  const {addUser} = useDatabase();
-  const navigate = useNavigate();
+  const { login , signup} = useAuth();
   async function handleSubmit(e) {
     // e.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await login(email, password);
-      console.log("sucessful" + "  " + uid);
-      addUser(uid)
-      navigate("/forgot-password");
+      await signup(email, password);
+      console.log("sucessful");
     } catch (err) {
       console.log(err);
       setError(err);
@@ -58,16 +54,24 @@ export default function LoginPage() {
           </div>
           {error && <Alert variant="danger">{error}</Alert>}
 
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <h1>Welcome to DallEGram</h1>
+          </div>
+
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <i><h4>Bring Your Words To Life With AI</h4></i>
+          </div>
+
           <Form.Group id="username" className=" mb-4">
           
-            <FloatingLabel controlId="floatingInput" label="Username">
+            <FloatingLabel controlId="floatingInput" label="Email">
               <Form.Control
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
-                placeholder="Username"
+                style={{ borderColor: '#000000' }}
+                placeholder="Email"
               />
             </FloatingLabel>
           </Form.Group>
@@ -79,7 +83,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Password"
               />
             </FloatingLabel>
@@ -90,7 +94,7 @@ export default function LoginPage() {
             variant="primary"
             className="w-100"
             type="submit"
-            onClick={() => handleSubmit()}
+            onClick={() => handleSubmit()} 
           >
             Login
           </Button>
@@ -108,6 +112,13 @@ export default function LoginPage() {
               </Link>
             </div>
           </div>
+
+          <div className="w-100 text-center mt-3">
+            <Link to="/homepage" style={{ color: '#007aad' }}>
+              Homepage: Test
+            </Link>
+          </div>
+
         </div>
       </Container>
     </>
