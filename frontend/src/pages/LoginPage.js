@@ -57,7 +57,7 @@ export default function LoginPage() {
           <div className="d-flex align-items-center justify-content-center w-100">
             {/* <img className="mb-4 w-100" src={logo} alt="" /> */}
           </div>
-          {/* {error ? <Alert variant="danger">{error}</Alert>: console.log("no errors")} */}
+          {error ? <Alert variant="danger" className="d-flex align-items-center justify-content-center w-100">{error}</Alert>: console.log("no errors")}
 
           <div className="d-flex align-items-center justify-content-center w-100">
             <h1>Welcome to DallEGram</h1>
