@@ -52,7 +52,7 @@ export default function Homepage() {
             style={{ maxHeight: '100px'}}
             navbarScroll
           >
-            <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="/homepage">Home</Nav.Link>
             <Nav.Link href="#action2">Public Feed</Nav.Link>
             <Nav.Link href="#action2">About Us</Nav.Link>
             <Nav.Link href="/">Logout</Nav.Link>
@@ -61,46 +61,28 @@ export default function Homepage() {
       </Container>
     </Navbar>
 
-    {/* Generate Image  */}
+    {/* User Profile  */}
+
+    {/* Greeting User (text) */}
     <Container
         className="d-flex flex-column align-items-center justify-content-center"
-        style={{ minHeight: '50vh' }}
+        style={{ minHeight: '20vh' }}
       >
+        {/* change "USER" to specific name */}
         <div className="w-100" style={{ maxWidth: '700px' }}>
-
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h2>Image Generator</h2>
+            <h2>Welcome User!</h2>
           </div>
-
-          <div className="d-flex align-items-center justify-content-center w-100">
-            <h6>Type a description of the image that you want. Be as creative as you can!</h6>
-          </div>
-
-          <Form.Group id="password" className="mb-4">
-           
-            <FloatingLabel controlId="floatingInput" label="Description">
-              <Form.Control
-                type="img_desc"
-                value={img_desc}
-                onChange={(e) => setImageDesc(e.target.value)}
-                required
-                style={{ borderColor: '#000000' }}
-                placeholder="Description"
-              />
-            </FloatingLabel>
-          </Form.Group>
-
-          <Button
-            disabled={loading}
-            variant="primary"
-            className="w-100"
-            type="submit"
-            onClick={() => handleSubmit()} 
-          >
-            Let's Make Magic!
-          </Button>
-
         </div>
+
+        <div className="w-100" style={{ maxWidth: '700px' }}>
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <h4>Let's look at some of the images you've created.</h4>
+          </div>
+        </div>
+
+        {/* Gallery of images */}
+
       </Container>
     </>
   );
