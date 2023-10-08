@@ -14,11 +14,13 @@ function App() {
     <Router>
       <DatabaseProvider>
         <AuthProvider>
-        <Route path="/" element={<LoginPage/>} />
+          <Routes>
+           <Route path="/" element={<LoginPage/>} />
           <Route path="/create-user" element={<CreateUser/>} />
           <Route path="/forgot-password" element={<ForgotPassword/>} />
           <Route path="/homepage" element={<Homepage/>} />
           <Route path="/profile" element={<Profile/>} />
+        </Routes>
         </AuthProvider>
         </DatabaseProvider>
       </Router>
