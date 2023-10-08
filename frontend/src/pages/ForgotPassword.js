@@ -67,7 +67,7 @@ export default function CreateUser() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Email"
               />
             </FloatingLabel>

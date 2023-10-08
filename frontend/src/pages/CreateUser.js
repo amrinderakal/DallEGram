@@ -64,7 +64,7 @@ export default function CreateUser() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="First Name"
               />
             </FloatingLabel>
@@ -77,7 +77,7 @@ export default function CreateUser() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Last Name"
               />
             </FloatingLabel>
@@ -90,7 +90,7 @@ export default function CreateUser() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Email"
               />
             </FloatingLabel>
@@ -103,7 +103,7 @@ export default function CreateUser() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Password"
               />
             </FloatingLabel>

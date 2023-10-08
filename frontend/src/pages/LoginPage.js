@@ -68,7 +68,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Email"
               />
             </FloatingLabel>
@@ -81,7 +81,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{ borderColor: '#F3CEB1' }}
+                style={{ borderColor: '#000000' }}
                 placeholder="Password"
               />
             </FloatingLabel>
@@ -110,6 +110,13 @@ export default function LoginPage() {
               </Link>
             </div>
           </div>
+
+          <div className="w-100 text-center mt-3">
+            <Link to="/homepage" style={{ color: '#007aad' }}>
+              Homepage: Test
+            </Link>
+          </div>
+
         </div>
       </Container>
     </>

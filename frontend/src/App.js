@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import CreateUser from './pages/CreateUser';
 import ForgotPassword from './pages/ForgotPassword';
+import Homepage from './pages/Homepage';
 import { AuthProvider } from "./context/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<LoginPage/>} />
           <Route path="/create-user" element={<CreateUser/>} />
           <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path="/homepage" element={<Homepage/>} />
         </Routes>
         </AuthProvider>
       </Router>
