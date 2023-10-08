@@ -20,7 +20,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+  const [uid, setUID] = useState(true);
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -50,10 +50,10 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       if (user) {
-       // setEmail(user.email);
-        //getAllWeights();
+       // Come here to send UID to the dbcontext setEmail(user.email);
+       setUID(user.uid)
+      console.log(uid)
       }
-
       setLoading(false);
     });
 
@@ -66,6 +66,7 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     resetPassword,
+    uid
     // updateEmail,
     // updatePassword,
   };

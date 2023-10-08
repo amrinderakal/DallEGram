@@ -5,21 +5,27 @@ import {
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import { useDatabase } from '../context/DatabaseContext';
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login , signup} = useAuth();
+  const { login , uid} = useAuth();
+  const {addUser} = useDatabase();
+  const navigate = useNavigate();
   async function handleSubmit(e) {
     // e.preventDefault();
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
-      console.log("sucessful");
+      await login(email, password);
+      console.log("sucessful" + "  " + uid);
+      addUser(uid)
+      navigate("/forgot-password");
     } catch (err) {
       console.log(err);
       setError(err);
