@@ -6,7 +6,6 @@ import CreateUser from './pages/CreateUser';
 import ForgotPassword from './pages/ForgotPassword';
 import Homepage from './pages/Homepage';
 import Profile from './pages/Profile';
-import PrivateRoute from './pages/PrivateRoute';
 import { AuthProvider } from "./context/AuthContext";
 import { DatabaseProvider } from './context/DatabaseContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
