@@ -1,9 +1,10 @@
 // ALL CURRENT HTML NEEDS TO BE A ENTIRELY DIFF FUNCTIONAL COMONENT (NAV BAR and IMAGE GENERATION) FOR CLEANER CODE
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Form, Button, Alert, FloatingLabel, Container, Nav, NavDropdown
+  Form, Button, FloatingLabel, Container, Nav, NavDropdown
 } from 'react-bootstrap';
 import { useAuth } from "../context/AuthContext";
+import { useNavigate} from 'react-router-dom';
 
 import NavigationBar from '../components/NavigationBar';
 export default function Homepage() {
@@ -11,8 +12,20 @@ export default function Homepage() {
     const [img_desc, setImageDesc] = useState()
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const { currentUser } = useAuth();
+     const navigate = useNavigate()
+    useEffect(() => {
+    if (currentUser) {
+      try {
+        //Get info from frontend
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+       navigate("/login")
+    }
+  }, []);
 
-    // Function call --> submit button
     async function handleSubmit(e) {
     try { 
       setError("");

@@ -2,8 +2,9 @@ import React from 'react'
 import {
   Form, Button, FloatingLabel, Container, Nav, Navbar, NavDropdown
 } from 'react-bootstrap';
-
+import { useAuth } from "../context/AuthContext";
 function NavigationBar() {
+  const {logout} = useAuth(); 
   return (
     <>
     {/* Navigation Bar */}
@@ -21,7 +22,10 @@ function NavigationBar() {
             <Nav.Link href="#action2">Public Feed</Nav.Link>
             <Nav.Link href="#action2">About Us</Nav.Link>
             {/* Need to call firebase logout function */}
-            <Nav.Link href="/">Logout</Nav.Link>
+            <Nav.Link href="/">
+              <span onClick={logout}>
+                Logout
+              </span></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
