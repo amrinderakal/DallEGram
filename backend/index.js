@@ -14,7 +14,7 @@ app.post("/add_user", (req, res) => {
   try{
     console.log(req.body)
     const user = req.body
-    const item = dbConnection.insertOneUser(user.fName, user.lName, user.uid, user.email, user.imageIDS)
+    const item = dbConnection.insertOneUser(user.fName, user.lName, user.uid, user.email)
       res.status(201).send("User Added");
   }catch{
        res.status(500).send('Server error');
