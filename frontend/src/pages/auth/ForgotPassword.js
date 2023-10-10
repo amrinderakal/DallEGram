@@ -3,7 +3,7 @@ import {
   Form, Button, Alert, FloatingLabel, Container,
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function CreateUser() {
   const [email, setEmail] = useState();
@@ -36,7 +36,7 @@ export default function CreateUser() {
     } catch (err) {
       console.log(err);
       createErrorResponse(err)
-    setLoading(false);
+     setLoading(false);
   }
   }
   return (
