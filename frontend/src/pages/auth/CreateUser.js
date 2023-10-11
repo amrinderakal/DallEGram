@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Form, Button, Alert, FloatingLabel, Container,
+  Form, Button, Alert, FloatingLabel, Container, Toast
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../../context/AuthContext";
 import { useDatabase } from '../../context/DatabaseContext';
-
-
 
 
 export default function CreateUser() {
@@ -20,6 +18,7 @@ export default function CreateUser() {
   const { signup, login, uid} = useAuth(); 
   const { addUser} = useDatabase();
   
+  const nav = useNavigate();
   const createErrorResponse = ((err)=>{
   const res = err.code
   switch(res) {
@@ -42,7 +41,10 @@ export default function CreateUser() {
       await signup(email, password);
       addUser(firstName, lastName, "", email)
       console.log("successful");
-      setSuccess("Accout Created!")
+      setSuccess("Account Created!")
+      
+      nav("/account-created")
+
       ///ROUTE TO A SUCCESS PAGE THAT TELLS USER TO LOGIN
     } catch (err) {
       console.log(err.code);
@@ -142,12 +144,6 @@ export default function CreateUser() {
             Create an Account
           </Button>
           {/* Should redirect to a success page & then login  */}
-
-          <div className="w-100 text-center mt-3">
-            <Link to="/" style={{ color: '#007aad' }}>
-              Login
-            </Link>
-          </div>
 
         </div>
       </Container>

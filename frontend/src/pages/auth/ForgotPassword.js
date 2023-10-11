@@ -97,7 +97,7 @@ export default function CreateUser() {
           </Button>
 
           <div className="w-100 text-center mt-3">
-            <Link to="/" style={{ color: '#007aad' }}>
+            <Link to="/login" style={{ color: '#007aad' }}>
                Login 
             </Link>
           </div>

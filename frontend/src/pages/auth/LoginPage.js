@@ -118,12 +118,6 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="w-100 text-center mt-3">
-            <Link to="/homepage" style={{ color: '#007aad' }}>
-              Homepage: Test
-            </Link>
-          </div>
-
         </div>
       </Container>
     </>
