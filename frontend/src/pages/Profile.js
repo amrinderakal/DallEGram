@@ -55,7 +55,7 @@ export default function Homepage() {
         {/* change "USER" to specific name */}
         <div className="w-100" style={{ maxWidth: '700px' }}>
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h2>Welcome User!</h2>
+            <h2>Welcome!</h2>
           </div>
         </div>
 
