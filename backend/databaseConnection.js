@@ -60,8 +60,8 @@ async function updateUID(email, uid) {
     await client.connect();
     const db = client.db('dallegram');
     const collection = db.collection('user');
-
-    // Find the first document in the collection
+    if(typeof uid == "string"){
+          // Find the first document in the collection
     const updatedItem = await collection.updateOne(
    { email: email },
    {
@@ -71,7 +71,10 @@ async function updateUID(email, uid) {
    }
    
 )
-    console.log(updatedItem);
+ console.log(updatedItem);
+    }
+  
+   
   } finally {
     // Close the database connection when finished or an error occurs
     await client.close();

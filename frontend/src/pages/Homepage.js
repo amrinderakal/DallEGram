@@ -17,7 +17,7 @@ export default function Homepage() {
     useEffect(() => {
     if (currentUser) {
       try {
-        //Get info from frontend
+        //await info from frontend
       } catch (error) {
         console.log(error);
       }
@@ -95,6 +95,7 @@ export default function Homepage() {
           >
             Let's Make Magic!
           </Button>
+           
 
         </div>
       </Container>

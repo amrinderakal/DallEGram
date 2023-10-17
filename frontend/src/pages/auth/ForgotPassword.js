@@ -96,10 +96,13 @@ export default function CreateUser() {
             Submit
           </Button>
 
-          <div className="w-100 text-center mt-3">
-            <Link to="/login" style={{ color: '#007aad' }}>
-               Login 
-            </Link>
+           <div className="w-100 text-center mt-3">
+            <div className="d-flex flex-row align-items-center justify-content-center">
+              <div className="me-1">Already reset password?</div>
+              <Link to="/login" style={{ color: '#007aad' }}>
+                Login
+              </Link>
+            </div>
           </div>
 
         </div>

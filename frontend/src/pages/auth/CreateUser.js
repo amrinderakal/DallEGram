@@ -144,7 +144,14 @@ export default function CreateUser() {
             Create an Account
           </Button>
           {/* Should redirect to a success page & then login  */}
-
+          <div className="w-100 text-center mt-3">
+            <div className="d-flex flex-row align-items-center justify-content-center">
+              <div className="me-1">Already have an account?</div>
+              <Link to="/login" style={{ color: '#007aad' }}>
+                Login
+              </Link>
+            </div>
+          </div>
         </div>
       </Container>
     </>
