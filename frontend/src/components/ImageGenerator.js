@@ -1,24 +1,20 @@
-import React, { useState } from "react";
+// ALL CURRENT HTML NEEDS TO BE A ENTIRELY DIFF FUNCTIONAL COMONENT (NAV BAR and IMAGE GENERATION) FOR CLEANER CODE
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Button,
-  Alert,
   FloatingLabel,
   Container,
   Nav,
-  Navbar,
   NavDropdown,
 } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
-import NavigationBar from "../components/NavigationBar";
+import { useNavigate } from "react-router-dom";
 
-export default function Homepage() {
-  // Set states here
+function ImageGenerator() {
   const [img_desc, setImageDesc] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Function call --> submit button
   async function handleSubmit(e) {
     try {
       setError("");
@@ -32,7 +28,6 @@ export default function Homepage() {
     setLoading(false);
   }
   return (
-    // CSS
     <>
       <style type="text/css">
         {`
@@ -48,31 +43,48 @@ export default function Homepage() {
     `}
       </style>
 
-      {/* Navigation Bar */}
-      <NavigationBar />
-
-      {/* User Profile  */}
-
-      {/* Greeting User (text) */}
       <Container
         className="d-flex flex-column align-items-center justify-content-center"
-        style={{ minHeight: "20vh" }}
+        style={{ minHeight: "50vh" }}
       >
-        {/* change "USER" to specific name */}
         <div className="w-100" style={{ maxWidth: "700px" }}>
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h2>Welcome!</h2>
+            <h2>Image Generator</h2>
           </div>
-        </div>
 
-        <div className="w-100" style={{ maxWidth: "700px" }}>
           <div className="d-flex align-items-center justify-content-center w-100">
-            <h4>Let's look at some of the images you've created.</h4>
+            <h6>
+              Type a description of the image that you want. Be as creative as
+              you can!
+            </h6>
           </div>
-        </div>
 
-        {/* Gallery of images */}
+          <Form.Group id="password" className="mb-4">
+            <FloatingLabel controlId="floatingInput" label="Description">
+              <Form.Control
+                type="img_desc"
+                value={img_desc}
+                onChange={(e) => setImageDesc(e.target.value)}
+                required
+                style={{ borderColor: "#000000" }}
+                placeholder="Description"
+              />
+            </FloatingLabel>
+          </Form.Group>
+
+          <Button
+            disabled={loading}
+            variant="primary"
+            className="w-100"
+            type="submit"
+            onClick={() => handleSubmit()}
+          >
+            Let's Make Magic!
+          </Button>
+        </div>
       </Container>
     </>
   );
 }
+
+export default ImageGenerator;

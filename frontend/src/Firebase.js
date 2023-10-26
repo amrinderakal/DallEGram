@@ -5,9 +5,7 @@ import { getAuth, initializeAuth } from "firebase/auth";
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 
-const firebaseConfig = {
-  
-};
+const firebaseConfig = {};
 
 const app = initializeApp(firebaseConfig);
 
