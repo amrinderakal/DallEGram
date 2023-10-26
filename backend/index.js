@@ -35,6 +35,19 @@ app.put("/update_uid", (req, res) => {
   
 });
 
+// updated the Profile of a user based on uid
+app.put("/update_profile", (req, res) => {
+  try{
+    console.log(req.body)
+    res.status(201).json();
+    dbConnection.updateProfile(req.body.uid, req.body.fName, req.body.lName, req.body.bio, req.body.profilePic)
+      res.status(201).send("Profile updated");
+  }catch{
+      res.status(500).send('Server error');
+  }
+  
+});
+
 // adds a image id to a user based on uid
 app.put("/add_image", (req, res) => {
   try{
