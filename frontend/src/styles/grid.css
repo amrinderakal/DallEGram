@@ -1,0 +1,67 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    margin: 25px;
+    
+}
+
+/* Create four equal columns that sits next to each other */
+.column_true {
+    flex: 33.33%;
+    max-width: 33.33%;
+    padding: 0 4px;
+overflow: hidden;
+}
+
+.column_false {
+    flex: 33.33%;
+    max-width: 33.33%;
+    padding: 0 4px;
+    /* Make the dummy objects fully transparent */
+    opacity: 0;
+    user-select: none;
+    /* Prevent text selection on the dummy objects */
+    pointer-events: none;
+    /* Disable all pointer events, making the objects uninteractive */
+    overflow: hidden;
+}
+
+
+
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 1750px) {
+    .column_true {
+        flex: 50%;
+        max-width: 50%;
+        overflow: hidden;
+    }
+
+    .column_false {
+        flex: 50%;
+        max-width: 50%;
+        /* Make the dummy objects fully transparent */
+        opacity: 0;
+        /* Prevent text selection on the dummy objects */
+        user-select: none;
+        /* Disable all pointer events, making the objects uninteractive */
+        pointer-events: none;
+        overflow: hidden;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1250px) {
+    .column_true {
+        flex: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .column_false {
+        display: none;
+        
+    }
+}

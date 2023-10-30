@@ -19,7 +19,8 @@ async function insertOneUser(fName, lName, uid, email) {
         lName : lName,
         email: email,
         imageURLS:[],
-        profilePic:""
+        profilePic:"",
+        bio: ""
       }
     )
     console.log(insertedItem);
@@ -82,6 +83,36 @@ async function updateUID(email, uid) {
   
 }
 
+async function updateProfile(uid, fName, lName, bio, profilePic) {
+  try {
+    await client.connect();
+    const db = client.db('dallegram');
+    const collection = db.collection('user');
+    if(typeof uid == "string"){
+          // Find the first document in the collection
+    const updatedItem = await collection.updateOne(
+   { uid: uid },
+   {
+     $set: {
+       profilePic: profilePic,
+       fName: fName,
+       lName: lName,
+       bio: bio
+     }
+   }
+   
+)
+ console.log(updatedItem);
+    }
+  
+   
+  } finally {
+    // Close the database connection when finished or an error occurs
+    await client.close();
+  }
+  
+}
+
 
 async function addImageToUser(uid, imageURL) {
   try {
@@ -120,5 +151,5 @@ async function getUser(uid) {
 
 // weite all db stuff here
 
-module.exports={insertOneUser, updateUID, addImageToUser, getUser, insertIntoFeedCollection}
+module.exports={insertOneUser, updateUID, addImageToUser, getUser, insertIntoFeedCollection, updateProfile}
 
