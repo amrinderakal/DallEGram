@@ -45,91 +45,95 @@ export default function LoginPage() {
     }
     `}
       </style>
+      <div style={{ background: "#383838" }}>
+        <Container
+          className="d-flex flex-column align-items-center justify-content-center"
+          style={{ width: "100%", height: "100vh" }}
+        >
+          <div className="w-100" style={{ maxWidth: "700px" }}>
+            <div className="d-flex align-items-center justify-content-center w-100">
+              {/* <img className="mb-4 w-100" src={logo} alt="" /> */}
+            </div>
+            {error ? (
+              <Alert
+                variant="danger"
+                className="d-flex align-items-center justify-content-center w-100"
+              >
+                {error}
+              </Alert>
+            ) : (
+              console.log("no errors")
+            )}
 
-      <Container
-        className="d-flex flex-column align-items-center justify-content-center"
-        style={{ width: "100%", height: "100vh", backgroundColor: "#383838" }}
-      >
-        <div className="w-100" style={{ maxWidth: "700px" }}>
-          <div className="d-flex align-items-center justify-content-center w-100">
-            {/* <img className="mb-4 w-100" src={logo} alt="" /> */}
-          </div>
-          {error ? (
-            <Alert
-              variant="danger"
-              className="d-flex align-items-center justify-content-center w-100"
+            <div className="d-flex align-items-center justify-content-center w-100">
+              <img src={Logo}></img>
+            </div>
+
+            <div className="d-flex align-items-center justify-content-center w-100">
+              <i>
+                <h5 style={{ color: "white" }}>
+                  Bring Your Words To Life With AI
+                </h5>
+              </i>
+            </div>
+
+            <Form.Group id="username" className=" mb-4">
+              <FloatingLabel controlId="floatingInput" label="Email">
+                <Form.Control
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  style={{
+                    borderColor: "#000000",
+                    borderRadius: "50px",
+                  }}
+                  placeholder="Email"
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group id="password" className="mb-4">
+              <FloatingLabel controlId="floatingInput" label="Password">
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  style={{ borderColor: "#000000", borderRadius: "50px" }}
+                  placeholder="Password"
+                />
+              </FloatingLabel>
+            </Form.Group>
+
+            <Button
+              disabled={loading}
+              variant="primary"
+              className="w-100"
+              type="submit"
+              style={{ borderRadius: "50px" }}
+              onClick={() => handleSubmit()}
             >
-              {error}
-            </Alert>
-          ) : (
-            console.log("no errors")
-          )}
+              Login
+            </Button>
 
-          <div className="d-flex align-items-center justify-content-center w-100">
-            <img src={Logo}></img>
-          </div>
-
-          <div className="d-flex align-items-center justify-content-center w-100">
-            <i>
-              <h4 style={{ color: "white" }}>
-                Bring Your Words To Life With AI
-              </h4>
-            </i>
-          </div>
-
-          <Form.Group id="username" className=" mb-4">
-            <FloatingLabel controlId="floatingInput" label="Email">
-              <Form.Control
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{
-                  borderColor: "#000000",
-                  borderRadius: "50px",
-                }}
-                placeholder="Email"
-              />
-            </FloatingLabel>
-          </Form.Group>
-          <Form.Group id="password" className="mb-4">
-            <FloatingLabel controlId="floatingInput" label="Password">
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ borderColor: "#000000" }}
-                placeholder="Password"
-              />
-            </FloatingLabel>
-          </Form.Group>
-
-          <Button
-            disabled={loading}
-            variant="primary"
-            className="w-100"
-            type="submit"
-            onClick={() => handleSubmit()}
-          >
-            Login
-          </Button>
-
-          <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password" style={{ color: "#007aad" }}>
-              Forgot Password?
-            </Link>
-          </div>
-          <div className="w-100 text-center mt-3">
-            <div className="d-flex flex-row align-items-center justify-content-center">
-              <div className="me-1">New User?</div>
-              <Link to="/create-user" style={{ color: "#007aad" }}>
-                Create an account
+            <div className="w-100 text-center mt-3">
+              <Link to="/forgot-password" style={{ color: "#007aad" }}>
+                Forgot Password?
               </Link>
             </div>
+            <div className="w-100 text-center mt-3">
+              <div className="d-flex flex-row align-items-center justify-content-center">
+                <div className="me-1" style={{ color: "white" }}>
+                  New User?
+                </div>
+                <Link to="/create-user" style={{ color: "#007aad" }}>
+                  Create an account
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 }
