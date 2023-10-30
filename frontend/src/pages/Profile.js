@@ -36,32 +36,14 @@ export default function Homepage() {
     setLoading(false);
   }
   return (
+
     // CSS
     <>
-      <style type="text/css">
-        {`
-    .btn-primary {
-      background-color: #3366CC;
-      color: white;
-     
-    }    
-    .btn-primary:hover{
-      background-color: #333399;
-      color: white;
-    }
-    `}
-      </style>
-
-      {/* Navigation Bar */}
       <NavigationBar />
 
-      {/* User Profile  */}
-
-      {/* Greeting User (text) */}
-      <Container
-        // className="d-flex flex-column align-items-center justify-content-center"
-        className="d-flex flex-column"
-        style={{ minHeight: "20vh" }}
+      <div
+        className="d-flex flex-row align-items-center justify-content-center"
+        // style={{ background: "#383838" }}
       >
       
       <Row>
@@ -72,12 +54,12 @@ export default function Homepage() {
                 fluid
                 src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}
                 alt="Empty Profile Page Image"
-                width="37%"
-                height="37%"
+                width="32%"
+                height="32%"
                 style={{ marginLeft: '20%'}}
             />
         </Col>
-        <Col xs={6} style={{marginTop:"6%", marginLeft:"-20%"}}>
+        <Col xs={6} style={{marginTop:"6%", marginLeft:"-22%"}}>
           <h1 style={{textAlign:"left"}}>
             Johnny Appleseed
           </h1>
@@ -91,9 +73,10 @@ export default function Homepage() {
           </p>
         </Col>
       </Row>
+      </div>
 
       <Row className="d-flex">
-        <Table bordered size="sm" style={{width:"15%", marginLeft: '12%', textAlign:"center"}}>
+        <Table bordered size="sm" style={{width:"12%", marginLeft: '12%', textAlign:"center"}}>
           <thead>
             <tr>
               <th>Followers</th>
@@ -109,15 +92,13 @@ export default function Homepage() {
         </Table>
       </Row>
 
-      <Row className="d-flex flex-column mx-auto" style={{marginTop:"-2%"}}>
+      <Row className="d-flex flex-column mx-auto" style={{marginTop:"-2%",  textAlign:"center"}}>
         <Col>
           <h2>
             <b><u>Your Creations</u></b>
           </h2>
         </Col>
       </Row>
-
-      </Container>
     </>
   );
 }
