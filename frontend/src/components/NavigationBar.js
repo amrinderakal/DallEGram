@@ -29,7 +29,7 @@ function NavigationBar() {
               <Nav.Link href="#action2">About Us</Nav.Link>
               {/* Need to call firebase logout function */}
               <Nav.Link href="/">
-                <span onClick={logout}>Logout</span>
+                <span onClick={logout()}>Logout</span>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
