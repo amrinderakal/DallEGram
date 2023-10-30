@@ -11,7 +11,8 @@ import {
   Col,
   Image, 
   Row,
-  Table
+  Table,
+  Modal
 } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import NavigationBar from "../components/NavigationBar";
@@ -21,6 +22,10 @@ export default function Homepage() {
   const [img_desc, setImageDesc] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Function call --> submit button
   async function handleSubmit(e) {
@@ -41,13 +46,91 @@ export default function Homepage() {
     <>
       <NavigationBar />
 
+      {/* Adding Modal */}
+      <Button 
+        variant="primary" 
+        onClick={handleShow}
+        style={{marginTop:"1%", marginLeft:"90%"}}
+      >
+        Edit Profile
+      </Button>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Update Profile Information</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group className="mb-4"> 
+              <FloatingLabel label="First Name">
+                <Form.Control
+                  type="text"
+                  // value={firstName}
+                  // onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  style={{ borderColor: '#000000' }}
+                  placeholder="First Name"
+                />
+              </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-4"> 
+              <FloatingLabel label="Last Name">
+                <Form.Control
+                  type="text"
+                  // value={firstName}
+                  // onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  style={{ borderColor: '#000000' }}
+                  placeholder="First Name"
+                />
+              </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-4"> 
+              <FloatingLabel label="Email">
+                <Form.Control
+                  type="text"
+                  // value={firstName}
+                  // onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  style={{ borderColor: '#000000' }}
+                  placeholder="First Name"
+                />
+              </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-4"> 
+              <FloatingLabel label="Biography">
+                <Form.Control
+                  type="text"
+                  // value={firstName}
+                  // onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  style={{ borderColor: '#000000' }}
+                  placeholder="First Name"
+                />
+              </FloatingLabel>
+            </Form.Group>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Update Profile</Button>
+        </Modal.Footer>
+      </Modal>
+
       <div
         className="d-flex flex-row align-items-center justify-content-center"
-        // style={{ background: "#383838" }}
       >
-      
       <Row>
-        <Col xs={6} style={{marginTop:"6%"}}>
+        <Col xs={6} style={{marginTop:"2%"}}>
           <Image
                 className="d-block"
                 thumbnail
@@ -59,7 +142,8 @@ export default function Homepage() {
                 style={{ marginLeft: '20%'}}
             />
         </Col>
-        <Col xs={6} style={{marginTop:"6%", marginLeft:"-22%"}}>
+
+        <Col xs={6} style={{marginTop:"2%", marginLeft:"-22%"}}>
           <h1 style={{textAlign:"left"}}>
             Johnny Appleseed
           </h1>
@@ -72,11 +156,8 @@ export default function Homepage() {
           Ut eleifend vitae sem vel aliquam. Mauris sed maximus arcu. Nulla risus odio, interdum a massa id, dictum pretium diam.
           </p>
         </Col>
-      </Row>
-      </div>
-
-      <Row className="d-flex">
-        <Table bordered size="sm" style={{width:"12%", marginLeft: '12%', textAlign:"center"}}>
+      
+        <Table bordered size="sm" style={{width:"12%", marginLeft: '12%', textAlign:"center", marginTop:"1%"}}>
           <thead>
             <tr>
               <th>Followers</th>
@@ -90,7 +171,8 @@ export default function Homepage() {
             </tr>
           </tbody>
         </Table>
-      </Row>
+        </Row>
+        </div>
 
       <Row className="d-flex flex-column mx-auto" style={{marginTop:"-2%",  textAlign:"center"}}>
         <Col>
@@ -99,6 +181,7 @@ export default function Homepage() {
           </h2>
         </Col>
       </Row>
+
     </>
   );
 }
