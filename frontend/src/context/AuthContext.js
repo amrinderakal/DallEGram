@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../Firebase";
-
+import { useDatabase } from "./DatabaseContext";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -21,10 +21,12 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [uid, setUID] = useState(true);
+  const { getImgagesForTheFeed, getUser, setUsername, username } =
+    useDatabase();
 
   function signup(email, password) {
-     const signup =  createUserWithEmailAndPassword(auth, email, password);
-    return signup
+    const signup = createUserWithEmailAndPassword(auth, email, password);
+    return signup;
   }
 
   function login(email, password) {
@@ -51,7 +53,10 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       if (user) {
-        setUID(user.uid)
+        setUID(user.uid);
+        getImgagesForTheFeed();
+        setUsername(getUser(user.uid).username);
+        console.log(username);
       }
       setLoading(false);
     });
@@ -66,7 +71,7 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     uid,
-  
+
     // updateEmail,
     // updatePassword,
   };

@@ -12,71 +12,66 @@ export default function Homepage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
-  const { getImagesFromFeed } = useDatabase();
+  const { getImgagsForTheFeed } = useDatabase();
   const navigate = useNavigate();
 
-  const items = [
-    {
-      uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
-      imageURL:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
-      likes: 23,
-      caption: "Albert Einstein",
-      username: "AB431",
-      liked: "far fa-heart",
-      posted: "5 DAYS AGO",
-    },
-    {
-      uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
-      imageURL:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
-      likes: 23,
-      caption: "Albert Einstein",
-      username: "AB431",
-      liked: "far fa-heart",
-      posted: "5 DAYS AGO",
-    },
-    {
-      uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
-      imageURL:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
-      likes: 23,
-      caption: "Albert Einstein",
-      username: "AB431",
-      liked: "far fa-heart",
-      posted: "5 DAYS AGO",
-    },
-    {
-      uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
-      imageURL:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
-      likes: 23,
-      caption: "Albert Einstein",
-      username: "AB431",
-      liked: "far fa-heart",
-      posted: "5 DAYS AGO",
-    },
-    {
-      uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
-      imageURL:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
-      likes: 23,
-      caption: "Albert Einstein",
-      username: "AB431",
-      liked: "far fa-heart",
-      posted: "5 DAYS AGO",
-    },
+  // const items = [
+  //   {
+  //     uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
+  //     imageURL:
+  //       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
+  //     likes: 23,
+  //     caption: "Albert Einstein",
+  //     username: "AB431",
+  //     liked: "far fa-heart",
+  //     posted: "5 DAYS AGO",
+  //   },
+  //   {
+  //     uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
+  //     imageURL:
+  //       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
+  //     likes: 23,
+  //     caption: "Albert Einstein",
+  //     username: "AB431",
+  //     liked: "far fa-heart",
+  //     posted: "5 DAYS AGO",
+  //   },
+  //   {
+  //     uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
+  //     imageURL:
+  //       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
+  //     likes: 23,
+  //     caption: "Albert Einstein",
+  //     username: "AB431",
+  //     liked: "far fa-heart",
+  //     posted: "5 DAYS AGO",
+  //   },
+  //   {
+  //     uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
+  //     imageURL:
+  //       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
+  //     likes: 23,
+  //     caption: "Albert Einstein",
+  //     username: "AB431",
+  //     liked: "far fa-heart",
+  //     posted: "5 DAYS AGO",
+  //   },
+  //   {
+  //     uid: "nuyX7PwtIuYjjPRAnxZfoEdKYpu1",
+  //     imageURL:
+  //       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Albert-einstein-profile-picture-512x512.png.cf.png",
+  //     likes: 23,
+  //     caption: "Albert Einstein",
+  //     username: "AB431",
+  //     liked: "far fa-heart",
+  //     posted: "5 DAYS AGO",
+  //   },
 
-    // Add more items as needed
-  ];
+  //   // Add more items as needed
+  // ];
   // const [items, setItems] = useState([]);
   useEffect(() => {
     if (currentUser) {
-      try {
-        // getImagesFromFeed();
-      } catch (error) {
-        console.log(error);
-      }
     } else {
       navigate("/login");
     }
@@ -94,7 +89,7 @@ export default function Homepage() {
       >
         {/* <Container className="d-flex flex-column align-items-center justify-content-center w-100 h-100 mt-4 "> */}
         <div className="d-flex flex-row align-items-center justify-content-center  ">
-          <DynamicGrid items={items} />
+          <DynamicGrid />
         </div>
 
         {/* </Container> */}

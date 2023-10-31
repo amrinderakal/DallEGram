@@ -29,7 +29,7 @@ async function insertOneUser(fName, lName, uid, email, username) {
   }
 }
 
-async function insertIntoFeedCollection(uid, imageURL, username, caption) {
+async function insertIntoFeedCollection(uid, imageURL, caption, username) {
   try {
     await client.connect();
     const db = client.db("dallegram");
@@ -50,7 +50,6 @@ async function insertIntoFeedCollection(uid, imageURL, username, caption) {
     // Close the database connection when finished or an error occurs
     await client.close();
   }
-  addImageToUser(uid, imageURL);
 }
 
 async function updateUID(email, uid) {
@@ -102,14 +101,14 @@ async function updateProfile(uid, fName, lName, bio, profilePic) {
   }
 }
 
-async function addImageToUser(uid, imageURL) {
+async function addImageToUser(uid, imageURL, public) {
   try {
     await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("user");
     const updatedItem = await collection.updateOne(
       { uid: uid },
-      { $push: { imageURLS: imageURL } }
+      { $push: { accountImages: { imageURL: imageURL, public: public } } }
     );
     // do something if there is not user
     console.log(updatedItem);
@@ -135,6 +134,38 @@ async function getUser(uid) {
   return user;
 }
 
+async function getImagesForFeed() {
+  let images = null;
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("feed");
+    images = await collection.find({}).toArray(function (err, results) {
+      images = results;
+    });
+    // do something if there is not user
+  } finally {
+    // Close the database connection when finished or an error occurs
+    await client.close();
+  }
+  //console.log(user);
+
+  // for (let i = 0; i < images.length; i++) {
+  //   try {
+  //     await client.connect();
+  //     const db = client.db("dallegram");
+  //     const collection = db.collection("user");
+  //     const user = await collection.findOne({ uid: images[i].uid });
+  //     images[i].username = user.username;
+  //     // do something if there is not user
+  //   } finally {
+  //     // Close the database connection when finished or an error occurs
+  //     await client.close();
+  //   }
+  // }
+  return images;
+}
+
 // weite all db stuff here
 
 module.exports = {
@@ -144,4 +175,5 @@ module.exports = {
   getUser,
   insertIntoFeedCollection,
   updateProfile,
+  getImagesForFeed,
 };
