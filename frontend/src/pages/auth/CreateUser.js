@@ -17,6 +17,7 @@ export default function CreateUser() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,7 +45,7 @@ export default function CreateUser() {
       setSuccess("");
       setLoading(true);
       await signup(email, password);
-      addUser(firstName, lastName, "", email);
+      addUser(firstName, lastName, "", email, username);
       console.log("successful");
       setSuccess("Account Created!");
 
@@ -134,8 +135,21 @@ export default function CreateUser() {
                 />
               </FloatingLabel>
             </Form.Group>
-
             <Form.Group id="username" className=" mb-4">
+              {" "}
+              {/* email or username? */}
+              <FloatingLabel controlId="floatingInput" label="Username">
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  style={{ borderColor: "#000000", borderRadius: "50px" }}
+                  placeholder="Email"
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group id="email" className=" mb-4">
               {" "}
               {/* email or username? */}
               <FloatingLabel controlId="floatingInput" label="Email">
