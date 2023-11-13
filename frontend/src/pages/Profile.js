@@ -1,187 +1,102 @@
-import React, { useState } from "react";
-import {
-  Form,
-  Button,
-  Alert,
-  FloatingLabel,
-  Container,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Col,
-  Image, 
-  Row,
-  Table,
-  Modal
-} from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
+import React from "react";
+import { Col, Image, Row } from "react-bootstrap";
 import NavigationBar from "../components/NavigationBar";
+import ModalComponent from "../components/ModalComponent";
 
 export default function Homepage() {
-  // Set states here
-  const [img_desc, setImageDesc] = useState();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  // Function call --> submit button
-  async function handleSubmit(e) {
-    try {
-      setError("");
-      setLoading(true);
-      console.log("successful");
-      //   add function call --> await(setImageDesc)
-    } catch (err) {
-      console.log(err);
-      setError(err);
-    }
-    setLoading(false);
-  }
   return (
-
-    // CSS
     <>
       <NavigationBar />
+      <ModalComponent />
 
-      {/* Adding Modal */}
-      <Button 
-        variant="primary" 
-        onClick={handleShow}
-        style={{marginTop:"1%", marginLeft:"90%"}}
-      >
-        Edit Profile
-      </Button>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Update Profile Information</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="mb-4"> 
-              <FloatingLabel label="First Name">
-                <Form.Control
-                  type="text"
-                  // value={firstName}
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  style={{ borderColor: '#000000' }}
-                  placeholder="First Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group className="mb-4"> 
-              <FloatingLabel label="Last Name">
-                <Form.Control
-                  type="text"
-                  // value={firstName}
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  style={{ borderColor: '#000000' }}
-                  placeholder="First Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group className="mb-4"> 
-              <FloatingLabel label="Email">
-                <Form.Control
-                  type="text"
-                  // value={firstName}
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  style={{ borderColor: '#000000' }}
-                  placeholder="First Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group className="mb-4"> 
-              <FloatingLabel label="Biography">
-                <Form.Control
-                  type="text"
-                  // value={firstName}
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  style={{ borderColor: '#000000' }}
-                  placeholder="First Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Update Profile</Button>
-        </Modal.Footer>
-      </Modal>
-
-      <div
-        className="d-flex flex-row align-items-center justify-content-center"
-      >
-      <Row>
-        <Col xs={6} style={{marginTop:"2%"}}>
+      <Row className="justify-content-center mt-3">
+        <Col
+          md={6}
+          lg={4}
+          xl={3}
+          style={{
+            marginTop: "30px",
+            maxWidth: "300px",
+          }}
+        >
           <Image
-                className="d-block"
-                thumbnail
-                fluid
-                src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}
-                alt="Empty Profile Page Image"
-                width="32%"
-                height="32%"
-                style={{ marginLeft: '20%'}}
-            />
+            className="d-block"
+            thumbnail
+            fluid
+            src={
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+            }
+            alt="Empty Profile Page Image"
+            style={{ width: '80%', height: 'auto' }}
+          />
         </Col>
 
-        <Col xs={6} style={{marginTop:"2%", marginLeft:"-22%"}}>
-          <h1 style={{textAlign:"left"}}>
-            Johnny Appleseed
-          </h1>
-          <p style={{textAlign:"left"}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Pellentesque sit amet aliquam lorem. Donec molestie eleifend augue vitae congue. 
-          Nulla maximus imperdiet feugiat. Vivamus suscipit tortor non velit vulputate, ac hendrerit neque dignissim. 
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-          Vivamus vel facilisis magna. Integer vel vestibulum libero. Nullam turpis mi, egestas tempor lacus sit amet, lacinia fermentum ante. 
-          Ut eleifend vitae sem vel aliquam. Mauris sed maximus arcu. Nulla risus odio, interdum a massa id, dictum pretium diam.
+        <Col
+          md={6}
+          lg={8}
+          xl={6}
+          style={{
+            marginTop: "20px",
+            maxWidth: "500px",
+            textAlign: "center"
+          }}
+        >
+          <h1 style={{ fontSize: "30px", textAlign: "center"}}>Johnny Appleseed</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Pellentesque sit amet aliquam lorem. Donec molestie eleifend augue vitae congue. 
+            Nulla maximus imperdiet feugiat. Vivamus suscipit tortor non velit vulputate, ac hendrerit neque dignissim. 
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+            Vivamus vel facilisis magna. Integer vel vestibulum libero. Nullam turpis mi, egestas tempor lacus sit amet, lacinia fermentum ante. 
+            Ut eleifend vitae sem vel aliquam. Mauris sed maximus arcu. Nulla risus odio, interdum a massa id, dictum pretium diam.
           </p>
         </Col>
-      
-        <Table bordered size="sm" style={{width:"12%", marginLeft: '12%', textAlign:"center", marginTop:"1%"}}>
-          <thead>
-            <tr>
-              <th>Followers</th>
-              <th>Following</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>300</td>
-              <td>250</td>
-            </tr>
-          </tbody>
-        </Table>
-        </Row>
-        </div>
 
-      <Row className="d-flex flex-column mx-auto" style={{marginTop:"-2%",  textAlign:"center"}}>
-        <Col>
-          <h2>
-            <b><u>Your Creations</u></b>
+        <Col md={12} style={{ marginTop: "20px", textAlign: "center" }}>
+          <h2 style={{ fontSize: "28px" }}>
+            <b>
+              <u>Your Creations</u>
+            </b>
           </h2>
         </Col>
       </Row>
 
+      {/* Media queries for responsiveness */}
+      <style jsx>{`
+        /* Screens with width between 768px and 1024px */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .justify-content-center {
+            text-align: center;
+            align-items: center;
+          }
+          .mt-3 {
+            margin-top: 15px;
+          }
+          h1 {
+            font-size: 25px;
+          }
+          h2 {
+            font-size: 18px;
+          }
+        }
+
+        /* Screens with width <= 767px */
+        @media (max-width: 767px) {
+          .justify-content-center {
+            text-align: center;
+            align-items: center;
+          }
+          .mt-3 {
+            margin-top: 10px;
+          }
+          h1 {
+            font-size: 20px;
+          }
+          h2 {
+            font-size: 18px;
+          }
+        }
+      `}</style>
     </>
   );
 }
