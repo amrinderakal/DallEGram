@@ -5,6 +5,7 @@ import CreateUser from "./pages/auth/CreateUser";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
+import AboutUs from "./pages/AboutUs";
 import AccountCreated from "./pages/auth/AccountCreated";
 import PrivateRoute from "./pages/auth/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route path="/account-created" element={<AccountCreated />} />
           </Routes>
         </AuthProvider>
