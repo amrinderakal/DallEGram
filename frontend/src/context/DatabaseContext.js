@@ -5,9 +5,11 @@ const DatabaseContext = React.createContext();
 export function DatabaseProvider({ children }) {
   const [username, setUsername] = useState("");
   const [feedImages, setFeedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function addUser(fName, lName, uid, email, username) {
     console.log(uid);
+    setIsLoading(true);
     await fetch("http://localhost:8000/add_user", {
       method: "Post",
       headers: { "Content-Type": "application/json" },
@@ -25,9 +27,11 @@ export function DatabaseProvider({ children }) {
       .catch((error) => {
         console.log(error);
       });
+    setIsLoading(false);
   }
 
   async function updateUID(email, uid) {
+    setIsLoading(true);
     console.log(uid);
     await fetch("http://localhost:8000/update_uid", {
       method: "Put",
@@ -43,10 +47,12 @@ export function DatabaseProvider({ children }) {
       .catch((error) => {
         console.log(error);
       });
+    setIsLoading(false);
   }
 
   // need to figure out where to call this
   async function getUser(uid) {
+    setIsLoading(true);
     console.log("getting user");
     let user = null;
     await fetch("http://localhost:8000/get_user/" + uid, {
@@ -61,11 +67,13 @@ export function DatabaseProvider({ children }) {
       .catch((error) => {
         console.log(error);
       });
+    setIsLoading(false);
     return user;
   }
 
   async function getImgagesForTheFeed() {
     let images = [];
+    setIsLoading(true);
     await fetch("http://localhost:8000/get_images_for_feed", {
       method: "Get",
       headers: { "Content-Type": "application/json" },
@@ -83,6 +91,7 @@ export function DatabaseProvider({ children }) {
       .catch((error) => {
         console.log(error);
       });
+    setIsLoading(false);
     return images;
   }
 
@@ -94,6 +103,7 @@ export function DatabaseProvider({ children }) {
     setUsername,
     getImgagesForTheFeed,
     feedImages,
+    isLoading,
   };
 
   return (

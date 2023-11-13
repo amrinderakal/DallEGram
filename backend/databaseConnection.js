@@ -57,7 +57,8 @@ async function updateUID(email, uid) {
     await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("user");
-    if (typeof uid == "string") {
+    console.log("uid:    " + uid);
+    if (!uid) {
       // Find the first document in the collection
       const updatedItem = await collection.updateOne(
         { email: email },

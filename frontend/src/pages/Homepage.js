@@ -6,13 +6,14 @@ import { useDatabase } from "../context/DatabaseContext";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar";
 import DynamicGrid from "../components/DynamicGrid";
+import Spinner from "react-bootstrap/Spinner";
 export default function Homepage() {
   // Set states here
   const [img_desc, setImageDesc] = useState();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const { currentUser } = useAuth();
-  const { getImgagsForTheFeed } = useDatabase();
+  const { isLoading } = useDatabase();
   const navigate = useNavigate();
 
   // const items = [
@@ -88,9 +89,16 @@ export default function Homepage() {
         style={{ background: "#383838" }}
       >
         {/* <Container className="d-flex flex-column align-items-center justify-content-center w-100 h-100 mt-4 "> */}
-        <div className="d-flex flex-row align-items-center justify-content-center  ">
-          <DynamicGrid />
-        </div>
+        {isLoading ? (
+          <Spinner
+            animation="border"
+            style={{ width: "4rem", height: "4rem" }}
+          />
+        ) : (
+          <div className="d-flex flex-row align-items-center justify-content-center  ">
+            <DynamicGrid />
+          </div>
+        )}
 
         {/* </Container> */}
       </div>
