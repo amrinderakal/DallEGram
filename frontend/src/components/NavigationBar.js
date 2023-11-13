@@ -42,7 +42,7 @@ function NavigationBar() {
               <Nav.Link href="/homepage">Public Feed</Nav.Link>
               <Nav.Link href="/">Image Generator</Nav.Link>
               <Nav.Link href="/profile">Profile</Nav.Link>
-              <Nav.Link href="#action2">About Us</Nav.Link>
+              <Nav.Link href="/about-us">About Us</Nav.Link>
               {/* Need to call firebase logout function */}
               <Nav.Link href="/" onClick={() => logout()}>
                 Logout
