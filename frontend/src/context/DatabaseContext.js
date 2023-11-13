@@ -94,6 +94,29 @@ export function DatabaseProvider({ children }) {
     setIsLoading(false);
     return images;
   }
+  async function getImagesForProfile(uid) {
+    let images = [];
+    setIsLoading(true);
+    await fetch("http://localhost:8000/get_images_for_profile_feed/" + uid, {
+      method: "Get",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.length % 3 != 0) {
+          while (result.length % 3 != 0) {
+            result.push({ uid: "false" });
+          }
+        }
+        setFeedImages(result);
+        console.log(feedImages);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setIsLoading(false);
+    return images;
+  }
 
   const value = {
     addUser,
@@ -104,6 +127,7 @@ export function DatabaseProvider({ children }) {
     getImgagesForTheFeed,
     feedImages,
     isLoading,
+    getImagesForProfile,
   };
 
   return (

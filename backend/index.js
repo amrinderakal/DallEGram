@@ -31,6 +31,17 @@ app.get("/get_images_for_feed", async (req, res) => {
   }
 });
 
+app.get("/get_images_for_profile_feed/:uid", async (req, res) => {
+  try {
+    var user_uid = req.params["uid"];
+    const images = await dbConnection.getImagesForProfileFeed(user_uid);
+    console.log(images);
+    res.send(images);
+  } catch {
+    res.status(500).send("Server error");
+  }
+});
+
 // ALL POST ROUTES
 // adds a user to the user collection
 app.post("/add_user", (req, res) => {

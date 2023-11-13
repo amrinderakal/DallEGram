@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import { Form, Button, FloatingLabel, Modal, Container } from "react-bootstrap";
 
-function ModalComponent() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+function ModalComponent({ show, setShow, handleClose, handleShow }) {
   return (
     <>
       <Container>
-        <Button
+        {/* <Button
           variant="primary"
           onClick={handleShow}
           style={{ marginTop: "1%", marginLeft: "90%" }}
         >
           Edit Profile
-        </Button>
+        </Button> */}
 
         <Modal
           show={show}
@@ -80,7 +76,11 @@ function ModalComponent() {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose} className="close-btn">
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              className="close-btn"
+            >
               Close
             </Button>
             <Button variant="primary" className="edit-btn">
@@ -89,30 +89,7 @@ function ModalComponent() {
           </Modal.Footer>
         </Modal>
       </Container>
-
       {/* Media queries for responsiveness */}
-      <style jsx>{`
-        @media (max-width: 767px) {
-          .justify-content-center {
-            text-align: center;
-          }
-
-          .mt-3 {
-            margin-top: 10px;
-          }
-
-          Button {
-            margin-left: 20%; /* Adjust as needed */
-            transform: translateX(-30%);
-          }
-
-          .close-btn,
-          .edit-btn {
-            width: 40%;
-            margin-top: 10px;
-          }
-        }
-      `}</style>
     </>
   );
 }

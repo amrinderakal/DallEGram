@@ -149,24 +149,27 @@ async function getImagesForFeed() {
     // Close the database connection when finished or an error occurs
     await client.close();
   }
-  //console.log(user);
-
-  // for (let i = 0; i < images.length; i++) {
-  //   try {
-  //     await client.connect();
-  //     const db = client.db("dallegram");
-  //     const collection = db.collection("user");
-  //     const user = await collection.findOne({ uid: images[i].uid });
-  //     images[i].username = user.username;
-  //     // do something if there is not user
-  //   } finally {
-  //     // Close the database connection when finished or an error occurs
-  //     await client.close();
-  //   }
-  // }
   return images;
 }
 
+async function getImagesForProfileFeed(uid) {
+  let images = null;
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("feed");
+    images = await collection
+      .find({ uid: uid })
+      .toArray(function (err, results) {
+        images = results;
+      });
+    // do something if there is not user
+  } finally {
+    // Close the database connection when finished or an error occurs
+    await client.close();
+  }
+  return images;
+}
 // weite all db stuff here
 
 module.exports = {
@@ -177,4 +180,5 @@ module.exports = {
   insertIntoFeedCollection,
   updateProfile,
   getImagesForFeed,
+  getImagesForProfileFeed,
 };

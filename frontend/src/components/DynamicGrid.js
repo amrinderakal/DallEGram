@@ -5,8 +5,7 @@ import "../styles/grid.css";
 import "../styles/card.css";
 import { useEffect } from "react";
 
-function DynamicGrid() {
-  const { feedImages } = useDatabase();
+function DynamicGrid({ feedImages }) {
   // let items = [];
   // useEffect(() => {
   //   items = [];
