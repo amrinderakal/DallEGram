@@ -54,9 +54,7 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       if (user) {
         setUID(user.uid);
-        const timer = setTimeout(() => {
-          getImgagesForTheFeed();
-        }, 1000);
+
         //
         // setUsername(getUser(user.uid).username);
         console.log(username);
