@@ -29,6 +29,21 @@ async function insertOneUser(fName, lName, uid, email, username) {
   }
 }
 
+async function getUserByUsername(username) {
+  let user = null;
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("user");
+    user = await collection.findOne({ username: username });
+  } finally {
+    await client.close();
+  }
+  return user;
+}
+
+
+
 async function insertIntoFeedCollection(uid, imageURL, caption, username) {
   try {
     await client.connect();
@@ -177,4 +192,5 @@ module.exports = {
   insertIntoFeedCollection,
   updateProfile,
   getImagesForFeed,
+  getUserByUsername,
 };

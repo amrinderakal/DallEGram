@@ -31,24 +31,47 @@ app.get("/get_images_for_feed", async (req, res) => {
   }
 });
 
-// ALL POST ROUTES
-// adds a user to the user collection
-app.post("/add_user", (req, res) => {
+app.post("/add_user", async (req, res) => {
   try {
-    console.log(req.body);
     const user = req.body;
-    const item = dbConnection.insertOneUser(
+
+    // Check if the username already exists
+    const existingUser = await dbConnection.getUserByUsername(user.username);
+    if (existingUser) {
+      return res.status(400).send("Username already exists");
+    }
+
+    // If the username doesn't exist, proceed with inserting the new user
+    const item = await dbConnection.insertOneUser(
       user.fName,
       user.lName,
       user.uid,
       user.email,
       user.username
     );
+
     res.status(201).send("User Added");
   } catch {
     res.status(500).send("Server error");
   }
 });
+
+app.get("/check_username/:username", async (req, res) => {
+  try {
+    const username = req.params.username;
+    const existingUser = await dbConnection.getUserByUsername(username);
+    res.send({ exists: !!existingUser });
+  } catch {
+    res.status(500).send("Server error");
+  }
+});
+
+
+
+// ALL POST ROUTES
+// adds a user to the user collection
+
+
 
 // ALL PUT Routes
 // updated the uid of a uses based on email
@@ -111,6 +134,11 @@ app.post("/add_image_to_feed_collection", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+
+
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${port}`);

@@ -38,26 +38,50 @@ export default function CreateUser() {
         setError(JSON.stringify(err));
     }
   };
+
   async function handleSubmit(e) {
     //e.preventDefault();
+  
     try {
       setError("");
       setSuccess("");
       setLoading(true);
+  
+      // Check if the username already exists in the backend
+      const existingUser = await checkUsernameExists(username);
+      if (existingUser) {
+        setError("Username already exists. Please choose a different username.");
+        setLoading(false);
+        return;
+      }
+  
+      // If the username doesn't exist, proceed with account creation
       await signup(email, password);
       addUser(firstName, lastName, "", email, username);
-      console.log("successful");
       setSuccess("Account Created!");
-
       nav("/account-created");
-
-      ///ROUTE TO A SUCCESS PAGE THAT TELLS USER TO LOGIN
+  
     } catch (err) {
-      console.log(err.code);
+      console.error(err);
       createErrorResponse(err);
     }
+  
     setLoading(false);
   }
+  
+  async function checkUsernameExists(username) {
+    const response = await fetch(`http://localhost:8000/check_username/${username}`);
+    const data = await response.json();
+    return data.exists;
+  }
+ 
+
+  
+
+  
+
+
+
   return (
     <>
       <style type="text/css">
@@ -96,10 +120,10 @@ export default function CreateUser() {
                 variant="success"
                 className="d-flex align-items-center justify-content-center w-100"
               >
-                {success}
+                {success}      
               </Alert>
             )}
-
+  
             <div className="d-flex align-items-center justify-content-center w-100">
               <img src={Logo}></img>
             </div>
