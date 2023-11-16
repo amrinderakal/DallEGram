@@ -1,8 +1,7 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS}@user.gyubsgw.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp`;
 const uuid = require("uuid");
-
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri);
 async function insertOneUser(fName, lName, uid, email, username) {
@@ -68,12 +67,13 @@ async function insertIntoFeedCollection(uid, imageURL, caption, username) {
 }
 
 async function updateUID(email, uid) {
-  try {
-    await client.connect();
-    const db = client.db("dallegram");
-    const collection = db.collection("user");
-    console.log("uid:    " + uid);
-    if (!uid) {
+  if (typeof uid != "boolean") {
+    try {
+      await client.connect();
+      const db = client.db("dallegram");
+      const collection = db.collection("user");
+      console.log("uid:    " + uid);
+
       // Find the first document in the collection
       const updatedItem = await collection.updateOne(
         { email: email },
@@ -84,12 +84,14 @@ async function updateUID(email, uid) {
         }
       );
       console.log(updatedItem);
+    } finally {
+      // Close the database connection when finished or an error occurs
+      await client.close();
     }
-  } finally {
-    // Close the database connection when finished or an error occurs
-    await client.close();
   }
 }
+
+
 
 async function updateProfile(uid, fName, lName, bio, profilePic) {
   try {
@@ -185,6 +187,23 @@ async function getImagesForProfileFeed(uid) {
   }
   return images;
 }
+
+async function deletePost(userUid, postId) {
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("feed");
+
+    const deletionResult = await collection.deleteOne({
+      uid: userUid,
+      _id: new ObjectId(postId),
+    });
+
+    return deletionResult.deletedCount > 0;
+  } finally {
+    await client.close();
+  }
+}
 // weite all db stuff here
 
 module.exports = {
@@ -197,4 +216,5 @@ module.exports = {
   getImagesForFeed,
   getUserByUsername,
   getImagesForProfileFeed,
+  deletePost,
 };

@@ -146,6 +146,24 @@ app.post("/add_image_to_feed_collection", async (req, res) => {
   }
 });
 
+app.delete("/delete_post/:uid/:postId", async (req, res) => {
+  try {
+    const userUid = req.params.uid;
+    const postId = req.params.postId;
+
+    const deleted = await dbConnection.deletePost(userUid, postId);
+
+    if (deleted) {
+      res.status(200).send("Post deleted successfully");
+    } else {
+      res.status(404).send("Post not found or unable to delete");
+    }
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).send("Server error: " + error.message);
+  }
+});
+
 
 
 

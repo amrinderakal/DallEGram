@@ -22,7 +22,10 @@ function DynamicGrid({ feedImages }) {
   //   //   }
   //   // }
   // }, []);
-
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
   const url =
     "https://res.cloudinary.com/practicaldev/image/fetch/s--1YjkUU2Q--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/a86595fypnp8bws7b3em.jpg";
   return (
@@ -38,7 +41,7 @@ function DynamicGrid({ feedImages }) {
                 like={item.liked}
                 likes={item.likes}
                 caption={item.caption}
-                posted={item.timestamp}
+                posted={formatDate(item.timestamp)}
               />
             </div>
           </div>
