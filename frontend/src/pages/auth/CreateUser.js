@@ -22,7 +22,7 @@ export default function CreateUser() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const { signup, login, uid } = useAuth();
-  const { addUser } = useDatabase();
+  const { addUser, checkUsernameExists } = useDatabase();
 
   const nav = useNavigate();
   const createErrorResponse = (err) => {
@@ -41,46 +41,34 @@ export default function CreateUser() {
 
   async function handleSubmit(e) {
     //e.preventDefault();
-  
+
     try {
       setError("");
       setSuccess("");
       setLoading(true);
-  
+
       // Check if the username already exists in the backend
       const existingUser = await checkUsernameExists(username);
       if (existingUser) {
-        setError("Username already exists. Please choose a different username.");
+        setError(
+          "Username already exists. Please choose a different username."
+        );
         setLoading(false);
         return;
       }
-  
+
       // If the username doesn't exist, proceed with account creation
       await signup(email, password);
       addUser(firstName, lastName, "", email, username);
       setSuccess("Account Created!");
       nav("/account-created");
-  
     } catch (err) {
       console.error(err);
       createErrorResponse(err);
     }
-  
+
     setLoading(false);
   }
-  
-  async function checkUsernameExists(username) {
-    const response = await fetch(`http://localhost:8000/check_username/${username}`);
-    const data = await response.json();
-    return data.exists;
-  }
- 
-
-  
-
-  
-
-
 
   return (
     <>
@@ -120,10 +108,10 @@ export default function CreateUser() {
                 variant="success"
                 className="d-flex align-items-center justify-content-center w-100"
               >
-                {success}      
+                {success}
               </Alert>
             )}
-  
+
             <div className="d-flex align-items-center justify-content-center w-100">
               <img src={Logo}></img>
             </div>
@@ -211,7 +199,7 @@ export default function CreateUser() {
             >
               Create Account
             </Button>
-            {/* Should redirect to a success page & then login  */}
+
             <div className="w-100 text-center mt-3">
               <div className="d-flex flex-row align-items-center justify-content-center">
                 <div className="me-1" style={{ color: "white" }}>

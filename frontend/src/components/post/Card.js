@@ -6,19 +6,24 @@ import Likes from "./Likes";
 import Caption from "./Caption";
 import Posted from "./Posted";
 import Comment from "./Comment";
-
+import "../../styles/card.css";
 const Card = (props) => (
-  <div className="card">
-    <Header profileImageUrl={props.profileImageUrl} username={props.username} />
-    <Media mediaUrl={props.mediaUrl} />
-    <div className="lower_container">
-      <ActionsBar like={props.like} />
-      <Likes likes={props.likes} />
-      <Caption username={props.username} caption={props.caption} />
-      <Posted posted={props.posted} />
-      <Comment />
+  <>
+    <div className="card ">
+      <Header
+        profileImageUrl={props.profileImageUrl}
+        username={props.username}
+      />
+      <Media mediaUrl={props.mediaUrl} />
+      <div className="lower_container">
+        <ActionsBar like={props.like} />
+        <Likes likes={props.likes} />
+        <Caption username={props.username} caption={props.caption} />
+        <Posted posted={props.posted} />
+        <Comment />
+      </div>
     </div>
-  </div>
+  </>
 );
 
 export default Card;

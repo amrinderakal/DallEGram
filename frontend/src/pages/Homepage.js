@@ -10,25 +10,20 @@ export default function Homepage() {
   // Set states here
 
   const { currentUser } = useAuth();
-  const { isLoading, getImgagesForTheFeed, feedImages } = useDatabase();
+  const { isLoading, getImgagesForTheFeed, feedImages, getUser } =
+    useDatabase();
+  const { uid } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (currentUser) {
-      const timer = setTimeout(() => {
-        getImgagesForTheFeed();
-      }, 1000);
-    } else {
+    if (!currentUser) {
       navigate("/login");
     }
   }, []);
 
   return (
-    // CSS
-
     <>
       <NavigationBar />
-      {/* <Post></Post> */}
       <div
         className="d-flex flex-row align-items-center justify-content-center"
         style={{
@@ -46,8 +41,6 @@ export default function Homepage() {
             <DynamicGrid feedImages={feedImages} />
           </div>
         )}
-
-        {/* </Container> */}
       </div>
     </>
   );

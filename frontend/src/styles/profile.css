@@ -1,0 +1,32 @@
+
+.bio {
+  color: grey;
+
+}
+
+.container {
+  text-align: center;
+}
+
+.main-container {
+  /* text-align: center; */
+  padding: 20px;
+  margin: 30px;
+  border-radius: 20px;
+  background-color: rgb(61, 61, 61);
+  color: white;
+  word-wrap: break-word;
+}
+.edit_btn{
+    margin-top: 15px;
+    background-color: #007AAD;;
+    color: white;
+    width: 50%;
+    font-size: 2rem;
+}
+/* .btn-primary:hover {
+    background-color: #005071;
+    color: white;
+    width: 50%;
+   
+} */

@@ -21,8 +21,12 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [uid, setUID] = useState(true);
-  const { getImgagesForTheFeed, getUser, setUsername, username } =
-    useDatabase();
+  const {
+    getImgagesForTheFeed,
+    getUser,
+
+    getImagesForProfile,
+  } = useDatabase();
 
   function signup(email, password) {
     const signup = createUserWithEmailAndPassword(auth, email, password);
@@ -54,11 +58,11 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       if (user) {
         setUID(user.uid);
-
-        //
-        // setUsername(getUser(user.uid).username);
-        console.log(username);
+        getImgagesForTheFeed();
+        getUser(user.uid);
+        getImagesForProfile(user.uid);
       }
+
       setLoading(false);
     });
 

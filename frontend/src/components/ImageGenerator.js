@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
-import OpenAI from 'openai';
+import OpenAI from "openai";
 
 function ImageGenerator() {
   const [img_desc, setImageDesc] = useState("");
@@ -9,7 +9,7 @@ function ImageGenerator() {
 
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_API_KEY,
-    dangerouslyAllowBrowser: true, // IDK ABOUT THIS 
+    dangerouslyAllowBrowser: true, // IDK ABOUT THIS
   });
 
   const handleGenerate = async () => {
@@ -60,14 +60,18 @@ function ImageGenerator() {
                   value={img_desc}
                   onChange={(e) => setImageDesc(e.target.value)}
                   required
-                  style={{ borderColor: "#000000", width: "100%", height: "50px" }}
+                  style={{
+                    borderColor: "#000000",
+                    width: "100%",
+                    height: "50px",
+                  }}
                   placeholder="An armchair in the shape of an avocado..."
                 />
               </Form.Group>
             </Form>
           </Col>
           <Col xs={12} md={4} className="mt-1 mb-1">
-            <Button variant="primary" onClick={handleGenerate} >
+            <Button variant="primary" onClick={handleGenerate}>
               Generate
             </Button>
           </Col>
@@ -78,7 +82,12 @@ function ImageGenerator() {
       {result && (
         <Row className="justify-content-center mt-1 mb-1">
           <Col lg={8} className="mt-1 mb-1">
-            <img className="result-image" src={result} alt="result" style={{ width: "100%" }} />
+            <img
+              className="result-image"
+              src={result}
+              alt="result"
+              style={{ width: "100%" }}
+            />
           </Col>
         </Row>
       )}

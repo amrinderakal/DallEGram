@@ -7,6 +7,8 @@ const dbConnection = require("./databaseConnection");
 require("dotenv").config();
 app.use(cors());
 app.use(bodyParser.json());
+//const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+//const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS}@user.gyubsgw.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp`;
 
 //  ALL GET ROUTES
 // finds user based on UID and sends the user as a response
@@ -24,7 +26,7 @@ app.get("/get_user/:uid", async (req, res) => {
 app.get("/get_images_for_feed", async (req, res) => {
   try {
     const images = await dbConnection.getImagesForFeed();
-    console.log(images);
+    //console.log(images);
     res.send(images);
   } catch {
     res.status(500).send("Server error");
@@ -35,10 +37,10 @@ app.get("/get_images_for_profile_feed/:uid", async (req, res) => {
   try {
     var user_uid = req.params["uid"];
     const images = await dbConnection.getImagesForProfileFeed(user_uid);
-    console.log(images);
+    //console.log(user_uid);
     res.send(images);
-  } catch {
-    res.status(500).send("Server error");
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 
@@ -49,19 +51,19 @@ app.post("/add_user", async (req, res) => {
     // Check if the username already exists
     const existingUser = await dbConnection.getUserByUsername(user.username);
     if (existingUser) {
-      return res.status(400).send("Username already exists");
+      res.status(400).send("Username already exists");
+    } else {
+      // If the username doesn't exist, proceed with inserting the new user
+      const item = await dbConnection.insertOneUser(
+        user.fName,
+        user.lName,
+        user.uid,
+        user.email,
+        user.username
+      );
+
+      res.status(201).send("User Added");
     }
-
-    // If the username doesn't exist, proceed with inserting the new user
-    const item = await dbConnection.insertOneUser(
-      user.fName,
-      user.lName,
-      user.uid,
-      user.email,
-      user.username
-    );
-
-    res.status(201).send("User Added");
   } catch {
     res.status(500).send("Server error");
   }
@@ -85,7 +87,6 @@ app.get("/check_username/:username", async (req, res) => {
 app.put("/update_uid", (req, res) => {
   try {
     console.log(req.body);
-    res.status(201).json();
     dbConnection.updateUID(req.body.email, req.body.uid);
     res.status(201).send("UID updated");
   } catch {
@@ -97,14 +98,15 @@ app.put("/update_uid", (req, res) => {
 app.put("/update_profile", (req, res) => {
   try {
     console.log(req.body);
-    res.status(201).json();
     dbConnection.updateProfile(
       req.body.uid,
       req.body.fName,
       req.body.lName,
+      req.body.username,
       req.body.bio,
       req.body.profilePic
     );
+
     res.status(201).send("Profile updated");
   } catch {
     res.status(500).send("Server error");
@@ -134,7 +136,8 @@ app.post("/add_image_to_feed_collection", async (req, res) => {
       req.body.uid,
       req.body.imageURL,
       req.body.caption,
-      req.body.username
+      req.body.username,
+      req.body.profilePic
     );
     res.status(201).send("Image Added");
   } catch {

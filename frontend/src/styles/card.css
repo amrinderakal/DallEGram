@@ -1,3 +1,4 @@
+
 .profile__img {
     width: 40px;
     height: 40px;
@@ -29,19 +30,21 @@
 
 .mediaPhoto {
     width: 512px;
-    height: 512px
+    height: 512px;
+
 }
+
 
 .post_container {
     width: 512px;
     height: 95%;
     overflow: hidden;
     margin-top: 2%;
-    background-color: #D9D9D9;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #efefef;
+    border: 5px solid rgb(61, 61, 61);
     margin-bottom: 2%;
+    background-color: #D9D9D9 ;
 }
 
 /* Actions Bar */

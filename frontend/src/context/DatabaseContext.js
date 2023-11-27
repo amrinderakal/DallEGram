@@ -5,8 +5,9 @@ const DatabaseContext = React.createContext();
 export function DatabaseProvider({ children }) {
   const [username, setUsername] = useState("");
   const [feedImages, setFeedImages] = useState([]);
+  const [profileImages, setProfileImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [user, setUser] = useState([]);
   async function addUser(fName, lName, uid, email, username) {
     console.log(uid);
     setIsLoading(true);
@@ -54,21 +55,18 @@ export function DatabaseProvider({ children }) {
   async function getUser(uid) {
     setIsLoading(true);
     console.log("getting user");
-    let user = null;
     await fetch("http://localhost:8000/get_user/" + uid, {
       method: "Get",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((result) => {
-        user = result;
-        console.log(user);
+        setUser(result);
       })
       .catch((error) => {
         console.log(error);
       });
     setIsLoading(false);
-    return user;
   }
 
   async function getImgagesForTheFeed() {
@@ -97,6 +95,7 @@ export function DatabaseProvider({ children }) {
   async function getImagesForProfile(uid) {
     let images = [];
     setIsLoading(true);
+    console.log("getting images for profile");
     await fetch("http://localhost:8000/get_images_for_profile_feed/" + uid, {
       method: "Get",
       headers: { "Content-Type": "application/json" },
@@ -108,7 +107,7 @@ export function DatabaseProvider({ children }) {
             result.push({ uid: "false" });
           }
         }
-        setFeedImages(result);
+        setProfileImages(result);
         console.log(feedImages);
       })
       .catch((error) => {
@@ -116,6 +115,44 @@ export function DatabaseProvider({ children }) {
       });
     setIsLoading(false);
     return images;
+  }
+
+  async function updateProfileInformation(
+    uid,
+    fName,
+    lName,
+    username,
+    bio,
+    profilePicUrl
+  ) {
+    setIsLoading(true);
+    await fetch("http://localhost:8000/update_profile", {
+      method: "Put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid: uid,
+        fName: fName,
+        lName: lName,
+        username: username,
+        bio: bio,
+        profilePic: profilePicUrl,
+      }),
+    })
+      .then(() => {
+        console.log("Profile updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setIsLoading(false);
+  }
+
+  async function checkUsernameExists(username) {
+    const response = await fetch(
+      `http://localhost:8000/check_username/${username}`
+    );
+    const data = await response.json();
+    return data.exists;
   }
 
   const value = {
@@ -128,6 +165,11 @@ export function DatabaseProvider({ children }) {
     feedImages,
     isLoading,
     getImagesForProfile,
+    user,
+    setUser,
+    profileImages,
+    updateProfileInformation,
+    checkUsernameExists,
   };
 
   return (
