@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
-const ActionsBar = (props) => (
+const ActionsBar = () => (
   <div className="ActionBar">
     <div className="left">
       <div className="like">

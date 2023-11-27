@@ -60,7 +60,7 @@ async function insertIntoFeedCollection(
       uid: uid,
       imageURL: imageURL,
       username: username,
-      likes: 0,
+      likedUIDs: [],
       caption: caption,
       comments: [],
       timestamp: Date.now(),
@@ -243,14 +243,14 @@ async function deletePost(userUid, postId) {
   }
 }
 
-async function updateLikes(postId) {
+async function updateLikes(postId, uid) {
   try {
     //await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("feed");
     const updatedPost = await collection.updateOne(
       { _id: new ObjectId(postId) },
-      { $inc: { likes: 1 } }
+      { $push: { likedUIDs: uid } }
     );
     return updatedPost.modifiedCount > 0;
   } finally {
@@ -258,14 +258,14 @@ async function updateLikes(postId) {
   }
 }
 
-async function removeLikes(postId) {
+async function removeLikes(postId, uid) {
   try {
     // await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("feed");
     const updatedPost = await collection.updateOne(
       { _id: new ObjectId(postId) },
-      { $inc: { likes: -1 } }
+      { $pull: { likedUIDs: uid } }
     );
     return updatedPost.modifiedCount > 0;
   } finally {

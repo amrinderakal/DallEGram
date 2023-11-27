@@ -166,8 +166,8 @@ app.delete("/delete_post/:uid/:postId", async (req, res) => {
 //add likes
 app.put("/update_likes/:postId", async (req, res) => {
   try {
-    const postId = req.params.postId;
-    const updatedPost = await dbConnection.updateLikes(postId);
+    const postId = req.params["postId"];
+    const updatedPost = await dbConnection.updateLikes(postId, req.body.uid);
 
     if (updatedPost) {
       res.status(200).send("Likes updated successfully");
@@ -183,8 +183,8 @@ app.put("/update_likes/:postId", async (req, res) => {
 //remove likes
 app.put("/remove_likes/:postId", async (req, res) => {
   try {
-    const postId = req.params.postId;
-    const updatedPost = await dbConnection.removeLikes(postId);
+    const postId = req.params["postId"];
+    const updatedPost = await dbConnection.removeLikes(postId, req.body.uid);
 
     if (updatedPost) {
       res.status(200).send("Likes removed successfully");

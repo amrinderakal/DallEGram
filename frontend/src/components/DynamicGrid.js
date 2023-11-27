@@ -20,8 +20,7 @@ function DynamicGrid({ feedImages }) {
               profileImageUrl={item.profilePicUrl}
               username={item.username}
               mediaUrl={item.imageURL}
-              like={item.liked}
-              likes={item.likes}
+              likes={item.likedUIDs}
               caption={item.caption}
               posted={formatDate(item.timestamp)}
             />
