@@ -8,7 +8,7 @@ export default function Homepage() {
     {
       name: "Shehneel Ashraf",
       imageSrc: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-      description: "Short Description",
+      description: "Shehneel is a senior at Rutgers University studying computer science and creative writing. She has enjoyed working on this project because she gained a lot of frontend development experience. Post graduation, Shehneel plans on working at Bank of America as a software engineer.",
     },
     {
       name: "Amrinderpal Akal",
@@ -36,11 +36,24 @@ export default function Homepage() {
 
   return (
     <>
-      <NavigationBar />
+
+    <NavigationBar />
+    <div
+        style={{
+          background: "#383838",
+          border: "40px solid gray",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "20px",
+
+        }}
+      >
 
       <Col xs={12} md={6} className="mx-auto text-center">
-        <p style={{ textDecoration: "underline", fontSize: "50px", marginTop: "6%", fontFamily: "Serif" }}>What is DalleGram?</p>
-        <p style={{ fontSize: "18px", fontFamily: "Serif" }}>
+        <p style={{ textDecoration: "underline", fontSize: "50px", marginTop: "6%", fontFamily: "Serif", color: "white"}}>What is DallEGram?</p>
+        <p style={{ fontSize: "18px", fontFamily: "Serif", color: "white" }}>
           Welcome to DallEGram, where our goal is to bring your imagination to life! We are an application that allows you to 
           create and post AI-generated images to your feed! Describe an image in text, and in return, you will receive an 
           image matching your description, which you can then choose to post to your account. The more images you share, 
@@ -51,7 +64,7 @@ export default function Homepage() {
 
       <Row className="justify-content-center" style={{ marginTop: "3%" }}>
         <Col xs={12} md={6} className="text-center mb-3">
-          <h1 style={{ textDecoration: "underline", fontSize: "40px" }}>Meet The Team</h1>
+          <h1 style={{ textDecoration: "underline", fontSize: "40px", color: "white" }}>Meet The Team</h1>
         </Col>
       </Row>
 
@@ -73,10 +86,11 @@ export default function Homepage() {
                 style={{ maxWidth: "250px" }}
               />
             </OverlayTrigger>
-            <p style={{ marginTop: "1%", textAlign: "center" }}>{member.name}</p>
+            <p style={{ marginTop: "1%", textAlign: "center", color: "white" }}>{member.name}</p>
           </Col>
         ))}
       </Row>
+      </div>
     </>
   );
 }
