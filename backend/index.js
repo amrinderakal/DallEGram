@@ -77,12 +77,8 @@ app.get("/check_username/:username", async (req, res) => {
   }
 });
 
-
-
 // ALL POST ROUTES
 // adds a user to the user collection
-
-
 
 // ALL PUT Routes
 // updated the uid of a uses based on email
@@ -164,10 +160,59 @@ app.delete("/delete_post/:uid/:postId", async (req, res) => {
   }
 });
 
+//add likes
+app.put("/update_likes/:postId", async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const updatedPost = await dbConnection.updateLikes(postId);
 
+    if (updatedPost) {
+      res.status(200).send("Likes updated successfully");
+    } else {
+      res.status(404).send("Post not found or unable to update likes");
+    }
+  } catch (error) {
+    console.error("Error updating likes:", error);
+    res.status(500).send("Server error: " + error.message);
+  }
+});
 
+//remove likes
+app.put("/remove_likes/:postId", async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const updatedPost = await dbConnection.removeLikes(postId);
 
+    if (updatedPost) {
+      res.status(200).send("Likes removed successfully");
+    } else {
+      res.status(404).send("Post not found or unable to remove likes");
+    }
+  } catch (error) {
+    console.error("Error removing likes:", error);
+    res.status(500).send("Server error: " + error.message);
+  }
+});
 
+//upload image to database
+app.post("/upload_image", async (req, res) => {
+  try {
+    const { uid, imageURL, caption, username } = req.body;
+    if (!uid || !imageURL || !caption || !username) {
+      return res.status(400).send("Missing required fields");
+    }
+    await dbConnection.insertIntoFeedCollection(
+      uid,
+      imageURL,
+      caption,
+      username
+    );
+    res.status(201).send("Image uploaded successfully");
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    res.status(500).send("Server error: " + error.message);
+  }
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${port}`);

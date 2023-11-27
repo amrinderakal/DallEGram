@@ -41,8 +41,6 @@ async function getUserByUsername(username) {
   return user;
 }
 
-
-
 async function insertIntoFeedCollection(uid, imageURL, caption, username) {
   try {
     await client.connect();
@@ -90,8 +88,6 @@ async function updateUID(email, uid) {
     }
   }
 }
-
-
 
 async function updateProfile(uid, fName, lName, bio, profilePic) {
   try {
@@ -204,7 +200,38 @@ async function deletePost(userUid, postId) {
     await client.close();
   }
 }
-// weite all db stuff here
+
+async function updateLikes(postId) {
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("feed");
+    const updatedPost = await collection.updateOne(
+      { _id: new ObjectId(postId) },
+      { $inc: { likes: 1 } }
+    );
+    return updatedPost.modifiedCount > 0;
+  } finally {
+    await client.close();
+  }
+}
+
+async function removeLikes(postId) {
+  try {
+    await client.connect();
+    const db = client.db("dallegram");
+    const collection = db.collection("feed");
+    const updatedPost = await collection.updateOne(
+      { _id: new ObjectId(postId) },
+      { $inc: { likes: -1 } }
+    );
+    return updatedPost.modifiedCount > 0;
+  } finally {
+    await client.close();
+  }
+}
+
+// write all db stuff here
 
 module.exports = {
   insertOneUser,
@@ -217,4 +244,6 @@ module.exports = {
   getUserByUsername,
   getImagesForProfileFeed,
   deletePost,
+  updateLikes,
+  removeLikes,
 };
