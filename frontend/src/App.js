@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import AboutUs from "./pages/AboutUs";
 import AccountCreated from "./pages/auth/AccountCreated";
+import ImageGeneratorPage from "./pages/ImageGeneratorPage";
 import PrivateRoute from "./pages/auth/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { DatabaseProvider } from "./context/DatabaseContext";
@@ -25,6 +26,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/account-created" element={<AccountCreated />} />
+            <Route path="/image-generator-page" element={<ImageGeneratorPage />} />
           </Routes>
         </AuthProvider>
       </DatabaseProvider>

@@ -40,7 +40,7 @@ function NavigationBar() {
               navbarScroll
             >
               <Nav.Link href="/homepage">Public Feed</Nav.Link>
-              <Nav.Link href="/">Image Generator</Nav.Link>
+              <Nav.Link href="/image-generator-page">Image Generator</Nav.Link>
               <Nav.Link href="/profile">Profile</Nav.Link>
               <Nav.Link href="/about-us">About Us</Nav.Link>
               {/* Need to call firebase logout function */}
