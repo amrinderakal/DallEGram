@@ -60,6 +60,7 @@ function ModalComponent({
       if (profilePic) {
         await handleUploadImage();
         await delay(2000);
+        window.location.reload();
         console.log("ProfilePic URL" + profilePicUrl);
         await updateProfileInformation(
           user.uid,
@@ -80,7 +81,8 @@ function ModalComponent({
         );
       }
 
-      await delay(1000);
+      await delay(2000);
+
       // Need to update the current user
       await getUser(user.uid);
       await getImagesForProfile(user.uid);
@@ -88,6 +90,7 @@ function ModalComponent({
 
       setError("");
       setShow(false);
+      window.location.reload();
     } else {
       //check if username is already in use
       const existingUser = await checkUsernameExists(username);
@@ -101,7 +104,7 @@ function ModalComponent({
         // if username not in use, update all profile information
         if (profilePic) {
           await handleUploadImage();
-          await delay(2000);
+          await delay(3000);
           console.log("ProfilePic URL" + profilePicUrl);
           await updateProfileInformation(
             user.uid,
@@ -128,6 +131,7 @@ function ModalComponent({
         await getImgagesForTheFeed();
         setError("");
         setShow(false);
+        window.location.reload();
       }
     }
   };

@@ -27,7 +27,7 @@ const Card = (props) => {
           <Likes likes={props.likes} />
           <Caption username={props.username} caption={props.caption} />
           <Posted posted={props.posted} />
-          <Comment />
+          {/* <Comment /> */}
         </div>
       </div>
     </>
