@@ -7,8 +7,6 @@ const dbConnection = require("./databaseConnection");
 require("dotenv").config();
 app.use(cors());
 app.use(bodyParser.json());
-//const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-//const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS}@user.gyubsgw.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp`;
 
 //  ALL GET ROUTES
 // finds user based on UID and sends the user as a response
@@ -73,7 +71,7 @@ app.get("/check_username/:username", async (req, res) => {
   try {
     const username = req.params.username;
     const existingUser = await dbConnection.getUserByUsername(username);
-    res.send({ exists: !!existingUser });
+    res.send({ exists: !existingUser });
   } catch {
     res.status(500).send("Server error");
   }
@@ -114,19 +112,19 @@ app.put("/update_profile", (req, res) => {
 });
 
 // adds a image id to a user based on uid
-app.put("/add_image", (req, res) => {
-  try {
-    console.log(req.body);
-    dbConnection.addImageToUser(
-      req.body.uid,
-      req.body.imageURL,
-      req.body.public
-    );
-    res.status(201).send("Image Added");
-  } catch {
-    res.status(500).send("Server error");
-  }
-});
+// app.put("/add_image", (req, res) => {
+//   try {
+//     console.log(req.body);
+//     dbConnection.addImageToUser(
+//       req.body.uid,
+//       req.body.imageURL,
+//       req.body.public
+//     );
+//     res.status(201).send("Image Added");
+//   } catch {
+//     res.status(500).send("Server error");
+//   }
+// });
 
 // adds an image to the post collection
 app.post("/add_image_to_feed_collection", async (req, res) => {
@@ -198,24 +196,24 @@ app.put("/remove_likes/:postId", async (req, res) => {
 });
 
 //upload image to database
-app.post("/upload_image", async (req, res) => {
-  try {
-    const { uid, imageURL, caption, username } = req.body;
-    if (!uid || !imageURL || !caption || !username) {
-      return res.status(400).send("Missing required fields");
-    }
-    await dbConnection.insertIntoFeedCollection(
-      uid,
-      imageURL,
-      caption,
-      username
-    );
-    res.status(201).send("Image uploaded successfully");
-  } catch (error) {
-    console.error("Error uploading image:", error);
-    res.status(500).send("Server error: " + error.message);
-  }
-});
+// app.post("/upload_image", async (req, res) => {
+//   try {
+//     const { uid, imageURL, caption, username } = req.body;
+//     if (!uid || !imageURL || !caption || !username) {
+//       return res.status(400).send("Missing required fields");
+//     }
+//     await dbConnection.insertIntoFeedCollection(
+//       uid,
+//       imageURL,
+//       caption,
+//       username
+//     );
+//     res.status(201).send("Image uploaded successfully");
+//   } catch (error) {
+//     console.error("Error uploading image:", error);
+//     res.status(500).send("Server error: " + error.message);
+//   }
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${port}`);
