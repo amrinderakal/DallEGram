@@ -13,9 +13,9 @@ function ImageGenerator() {
   });
 
   const handleGenerate = async () => {
-    setLoading(true);
 
     try {
+      setLoading(true);
       const res = await openai.images.generate({
         prompt: img_desc,
         n: 1,
@@ -23,7 +23,10 @@ function ImageGenerator() {
       });
 
       setLoading(false);
-      setResult(res.data.data[0].url);
+      // setResult(res.data.data[0].url);
+
+      setResult(res.data[0].url);
+
     } catch (error) {
       setLoading(false);
       console.error("Error generating image:", error.message);
@@ -71,7 +74,7 @@ function ImageGenerator() {
             </Form>
           </Col>
           <Col xs={12} md={4} className="mt-1 mb-1">
-            <Button variant="primary" onClick={handleGenerate}>
+            <Button variant="primary" onClick={handleGenerate} disabled={loading}>
               Generate
             </Button>
           </Col>
@@ -81,12 +84,12 @@ function ImageGenerator() {
       {/* Display result image if available */}
       {result && (
         <Row className="justify-content-center mt-1 mb-1">
-          <Col lg={8} className="mt-1 mb-1">
+          <Col lg={8} className="justify-content-center mt-1 mb-1">
             <img
               className="result-image"
               src={result}
               alt="result"
-              style={{ width: "100%" }}
+              style={{ width: "50%" }}
             />
           </Col>
         </Row>
