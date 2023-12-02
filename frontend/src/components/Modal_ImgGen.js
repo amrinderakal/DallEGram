@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { Form, Button, FloatingLabel, Modal, Container } from "react-bootstrap";
 
-function Modal_ImgGen({ show, setShow }) {
-  const handleClose = () => setShow(false);
+function Modal_ImgGen({ show, setShow, handleShow }) {
   const [caption, setCaption] = useState("");
 
-//   console.log("Modal_ImgGen rendered with show:", show);
+  const handleClose = () => {
+    setShow(false);
+    setCaption("");
+    // handleShow(); // Commenting this out as it may not be necessary
+  };
 
-    const handlePostImage = () => {
-    console.log("Post Image button clicked");
+  const handlePostImage = () => {
+    console.log("Post Image button clicked with caption:", caption);
     handleClose();
   };
 
@@ -34,19 +37,21 @@ function Modal_ImgGen({ show, setShow }) {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-        <style type="text/css">
+          <style type="text/css">
             {`
               .modal-btn {
-                width: 200px; 
-                height: 40px; 
-                margin-right: 10px; 
+                width: 200px;
+                height: 40px;
+                margin-right: 10px;
               }
             `}
-        </style>
+          </style>
           <Button variant="secondary" onClick={handleClose} className="modal-btn">
             Close
           </Button>
-          <Button onClick={handlePostImage} className="modal-btn">Post Image</Button>
+          <Button onClick={handlePostImage} className="modal-btn">
+            Post Image
+          </Button>
         </Modal.Footer>
       </Modal>
     </Container>

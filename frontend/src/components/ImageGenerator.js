@@ -9,8 +9,7 @@ function ImageGenerator() {
   const [loading, setLoading] = useState(false);
 
   const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false); // Use a separate state for the modal
 
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_API_KEY,
@@ -28,13 +27,17 @@ function ImageGenerator() {
   
       setLoading(false);
       setResult(res.data[0].url);
-      handleShow();
+      // handleShow();
   
     } catch (error) {
       setLoading(false);
       console.error("Error generating image:", error.message);
     }
   };  
+
+  const handlePostButtonClick = () => {
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -102,10 +105,15 @@ function ImageGenerator() {
         {/* Post button if image appears */}
         <Row className="d-flex flex-column align-items-center justify-content-center">
           <Col lg={8} className="text-center">
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={handlePostButtonClick}>
               Post
             </Button>
-            <Modal_ImgGen show={show} setShow={setShow} handleShow={handleShow} />
+            <Modal_ImgGen
+              show={showModal}
+              setShow={setShowModal}
+              handleShow={handlePostButtonClick}
+              caption=""
+            />
           </Col>
         </Row>
       </>
