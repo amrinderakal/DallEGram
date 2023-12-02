@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Image} from "react-bootstrap";
 import OpenAI from "openai";
 
 function ImageGenerator() {
@@ -23,7 +23,6 @@ function ImageGenerator() {
       });
 
       setLoading(false);
-      // setResult(res.data.data[0].url);
 
       setResult(res.data[0].url);
 
@@ -52,7 +51,7 @@ function ImageGenerator() {
 
       <Container fluid style={{ marginLeft: "70px" }}>
         <Row className="mt-1" style={{ color: "white" }}>
-          <Col xs={12} className="mt-1 mb-1">
+          <Col xs={12} className="mt-1 mb-1" style={{paddingTop:"60px"}}>
             <p>Start with a detailed description</p>
           </Col>
           <Col xs={8} md={8} className="mt-1 mb-1">
@@ -83,13 +82,14 @@ function ImageGenerator() {
 
       {/* Display result image if available */}
       {result && (
-        <Row className="justify-content-center mt-1 mb-1">
-          <Col lg={8} className="justify-content-center mt-1 mb-1">
-            <img
+        <Row className="d-flex flex-row align-items-center justify-content-center">
+          <Col lg={8} className="d-flex justify-content-center">
+            <Image
               className="result-image"
+              thumbnail
               src={result}
               alt="result"
-              style={{ width: "50%" }}
+              style={{ width: "50%", height: "75%"}}
             />
           </Col>
         </Row>
