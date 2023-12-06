@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { Form, Button, Col, Row, Container, Image} from "react-bootstrap";
 import OpenAI from "openai";
 import Modal_ImgGen from "../components/Modal_ImgGen";
+import { useAuth } from "../context/AuthContext";
+import { useDatabase } from "../context/DatabaseContext";
 
 function ImageGenerator() {
+  const { currentUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [caption, setCaption] = useState(""); 
+  const { user } = useDatabase();
+
   const [img_desc, setImageDesc] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,10 +42,40 @@ function ImageGenerator() {
     }
   };  
 
-  const handlePostButtonClick = () => {
-    setShowModal(true);
+  //const handlePostButtonClick = () => {
+    //setShowModal(true);
+  //};
+  const handlePostButtonClick = async (result, currentUser, user, caption) => {
+    setShowModal(false); 
+  
+    try {
+      setIsLoading(true);
+  
+      const response = await fetch("http://localhost:8000/add_image_to_feed_collection", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: currentUser.uid,
+          imageURL: result,
+          caption: caption,
+          username: user.username,
+          profilePic: user.profilePic,
+        }),
+      });
+  
+      if (response.ok) {
+        console.log("Image added to the feed");
+      } else {
+        console.error("Error adding image to the feed");
+      }
+    } catch (error) {
+      console.error("Error adding image to the feed:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
   return (
     <>
       <style type="text/css">
@@ -104,18 +141,20 @@ function ImageGenerator() {
 
         {/* Post button if image appears */}
         <Row className="d-flex flex-column align-items-center justify-content-center">
-          <Col lg={8} className="text-center">
-            <Button variant="primary" onClick={handlePostButtonClick}>
-              Post
-            </Button>
-            <Modal_ImgGen
-              show={showModal}
-              setShow={setShowModal}
-              handleShow={handlePostButtonClick}
-              caption=""
-            />
-          </Col>
-        </Row>
+        <Col lg={8} className="text-center">
+          <Button variant="primary" onClick={() => setShowModal(true)}>
+            Post
+          </Button>
+          <Modal_ImgGen
+            show={showModal}
+            setShow={setShowModal}
+            handlePostButtonClick={handlePostButtonClick}  
+            result={result}
+            currentUser={currentUser}
+            user={user}
+          />
+        </Col>
+      </Row>
       </>
     )}
     </>

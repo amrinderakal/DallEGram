@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, FloatingLabel, Modal, Container } from "react-bootstrap";
 
-function Modal_ImgGen({ show, setShow, handleShow }) {
+function Modal_ImgGen({ show, setShow, handleShow, handlePostButtonClick, result, currentUser, user}) {
   const [caption, setCaption] = useState("");
 
   const handleClose = () => {
@@ -12,6 +12,7 @@ function Modal_ImgGen({ show, setShow, handleShow }) {
 
   const handlePostImage = () => {
     console.log("Post Image button clicked with caption:", caption);
+    handlePostButtonClick(result, currentUser, user, caption);
     handleClose();
   };
 
