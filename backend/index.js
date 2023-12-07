@@ -71,7 +71,7 @@ app.get("/check_username/:username", async (req, res) => {
   try {
     const username = req.params.username;
     const existingUser = await dbConnection.getUserByUsername(username);
-    res.send({ exists: !existingUser });
+    res.send({ exists: !!existingUser });
   } catch {
     res.status(500).send("Server error");
   }
