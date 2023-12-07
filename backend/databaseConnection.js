@@ -192,9 +192,10 @@ async function getImagesForFeed() {
     //await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("feed");
-    images = await collection.find({}).toArray(function (err, results) {
-      images = results;
-    });
+    images = await collection.find({}).sort({ timestamp: -1 }).toArray();
+    //images = await collection.find({}).toArray(function (err, results) {
+      //images = results;
+    //});
     // do something if there is not user
   } catch (err) {
     console.log(err);
@@ -211,11 +212,13 @@ async function getImagesForProfileFeed(uid) {
     //await client.connect();
     const db = client.db("dallegram");
     const collection = db.collection("feed");
-    images = await collection
-      .find({ uid: uid })
-      .toArray(function (err, results) {
-        images = results;
-      });
+    //images = await collection
+      //.find({ uid: uid })
+      //.toArray(function (err, results) {
+        //images = results;
+      //});
+    images = await collection.find({ uid: uid }).sort({ timestamp: -1 }).toArray();
+
     // do something if there is not user
   } catch (err) {
     console.log(err);
