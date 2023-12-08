@@ -94,13 +94,9 @@ export default function Homepage() {
           </MDBContainer>
         </div>
         <div class="main-container ">
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <div className="d-flex flex-row align-items-center justify-content-center  ">
-              <DynamicGrid feedImages={profileImages} />
-            </div>
-          )}
+          <div className="d-flex flex-row align-items-center justify-content-center  ">
+            <DynamicGrid feedImages={profileImages} />
+          </div>
         </div>
       </div>
     </>

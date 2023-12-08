@@ -51,7 +51,7 @@
 
 .ActionBar {
     font-size: 24px;
-    padding: 8px;
+    margin-top: 5px;
     stroke: black;
     stroke-width: 50;
     color: #D9D9D9;
@@ -67,9 +67,16 @@
     float: left;
     overflow: hidden;
 }
-.icn_btn{
+.icn_btn_false{
     background-color: transparent;
     border-color: transparent;
+    color: transparent;
+}
+
+.icn_btn_true {
+    background-color: transparent;
+    border-color: transparent;
+    color: red;
 }
 
 

@@ -23,6 +23,7 @@ function DynamicGrid({ feedImages }) {
               likes={item.likedUIDs}
               caption={item.caption}
               posted={formatDate(item.timestamp)}
+              postID={item._id}
             />
           </div>
         </div>

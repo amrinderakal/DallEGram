@@ -10,8 +10,7 @@ export default function Homepage() {
   // Set states here
 
   const { currentUser } = useAuth();
-  const { isLoading, getImgagesForTheFeed, feedImages, getUser } =
-    useDatabase();
+  const { feedImages } = useDatabase();
   const { uid } = useAuth();
   const navigate = useNavigate();
 
@@ -33,14 +32,9 @@ export default function Homepage() {
           width: "100%",
         }}
       >
-        {/* <Container className="d-flex flex-column align-items-center justify-content-center w-100 h-100 mt-4 "> */}
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <div className="d-flex flex-row align-items-center justify-content-center  ">
-            <DynamicGrid feedImages={feedImages} />
-          </div>
-        )}
+        <div className="d-flex flex-row align-items-center justify-content-center  ">
+          <DynamicGrid feedImages={feedImages} />
+        </div>
       </div>
     </>
   );

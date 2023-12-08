@@ -155,6 +155,42 @@ export function DatabaseProvider({ children }) {
     return data.exists;
   }
 
+  async function addUidLikedToImageFeed(imageId, uid) {
+    setIsLoading(true);
+    await fetch("http://localhost:8000/update_likes/" + imageId, {
+      method: "Put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid: uid,
+      }),
+    })
+      .then(() => {
+        console.log("Image updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setIsLoading(false);
+  }
+
+  async function removeUidLikedToImageFeed(imageId, uid) {
+    setIsLoading(true);
+    await fetch("http://localhost:8000/remove_likes/" + imageId, {
+      method: "Put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid: uid,
+      }),
+    })
+      .then(() => {
+        console.log("Image updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setIsLoading(false);
+  }
+
   const value = {
     addUser,
     updateUID,
@@ -170,6 +206,8 @@ export function DatabaseProvider({ children }) {
     profileImages,
     updateProfileInformation,
     checkUsernameExists,
+    addUidLikedToImageFeed,
+    removeUidLikedToImageFeed,
   };
 
   return (

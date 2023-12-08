@@ -8,12 +8,7 @@ import Posted from "./Posted";
 import Comment from "./Comment";
 import "../../styles/card.css";
 const Card = (props) => {
-  // const [numOfLikes, setNumofLikes] = useState(props.likes);
-  // useEffect(() => {
-  //   console.log(props.likes);
-  //   setNumofLikes(props.likes);
-  // }, []);
-
+  const [liked, isLiked] = useState(false);
   return (
     <>
       <div className="card ">
@@ -23,7 +18,7 @@ const Card = (props) => {
         />
         <Media mediaUrl={props.mediaUrl} />
         <div className="lower_container">
-          <ActionsBar />
+          <ActionsBar likes={props.likes} postId={props.postID} />
           <Likes likes={props.likes} />
           <Caption username={props.username} caption={props.caption} />
           <Posted posted={props.posted} />

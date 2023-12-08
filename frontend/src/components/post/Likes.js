@@ -1,7 +1,11 @@
 import React from "react";
 
-const Likes = (props) => (
-  <div className="likes">{new Array(props.likes).length} likes</div>
-);
+const Likes = (props) => {
+  return (
+    <div className="likes">
+      {props.likes ? props.likes.length : "Und"} likes
+    </div>
+  );
+};
 
 export default Likes;
