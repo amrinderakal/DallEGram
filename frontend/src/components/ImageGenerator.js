@@ -1,3 +1,4 @@
+// ImageGenerator.jsx
 import React, { useState } from "react";
 import { Form, Button, Col, Row, Container, Image } from "react-bootstrap";
 import OpenAI from "openai";
@@ -41,9 +42,6 @@ function ImageGenerator() {
     }
   };
 
-  //const handlePostButtonClick = () => {
-  //setShowModal(true);
-  //};
   const handlePostButtonClick = async (result, currentUser, user, caption) => {
     setShowModal(false);
 
@@ -93,28 +91,55 @@ function ImageGenerator() {
         {`
        .btn-primary {
          background-color: #007AAD;
+        //  border: 2px solid #000000;
          color: white;
-         width: 60%;
+         width: 40%;
          height: 50px;
        }    
        .btn-primary:hover {
          background-color: #005071;
          color: white;
        }
+
+       @media (max-width: 576px) {
+        .form-width,
+        .btn-primary {
+          width: 90%;
+        }
+      }
+
+      @media (min-width: 577px) and (max-width: 992px) {
+        .form-width {
+          width: 80%;
+        }
+
+        .btn-primary {
+          width: 50%;
+        }
+      }
+
+      @media (min-width: 993px) {
+        .form-width {
+          width: 100%;
+        }
+
+        .btn-primary {
+          width: 40%;
+        }
+      }
     `}
       </style>
 
-      <Container fluid style={{ marginLeft: "70px", color: "black" }}>
-        <Row className="mt-1" style={{ color: "black" }}>
-          <Col
-            xs={12}
-            className="mt-1 mb-1"
-            style={{ paddingTop: "60px", color: "black", fontWeight: "bold" }}
-          >
+      <Container fluid>
+        <Row
+          className="d-flex flex-row align-items-center justify-content-center"
+          style={{ color: "black" }}
+        >
+          <Col lg={8} className="d-flex justify-content-center mt-5">
             <p>Start with a detailed description</p>
           </Col>
-          <Col xs={8} md={8} className="mt-1 mb-1">
-            <Form>
+          <Col lg={8} className="d-flex justify-content-center">
+            <Form className="form-width">
               <Form.Group id="img-description" className="mb-3">
                 <Form.Control
                   type="text"
@@ -131,11 +156,12 @@ function ImageGenerator() {
               </Form.Group>
             </Form>
           </Col>
-          <Col xs={12} md={4} className="mt-1 mb-1">
+          <Col lg={8} className="d-flex justify-content-center">
             <Button
               variant="primary"
               onClick={handleGenerate}
               disabled={loading}
+              className="btn-primary"
             >
               Generate
             </Button>
@@ -153,7 +179,7 @@ function ImageGenerator() {
                 thumbnail
                 src={result}
                 alt="result"
-                style={{ width: "50%", height: "75%" }}
+                style={{ width: "50%", height: "75%", border: "2px solid black"}}
               />
             </Col>
           </Row>

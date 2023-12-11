@@ -1,3 +1,4 @@
+// ImageGeneratorPage.jsx
 import React from "react";
 import { Col, Row, Image, Container } from "react-bootstrap";
 import ImageGenerator from "../components/ImageGenerator";
@@ -23,11 +24,11 @@ export default function ImageGeneratorPage() {
         <ImageGenerator />
 
         <Row
-          className="d-flex flex-column align-items-center justify-content-center mt-3"
-          style={{ color: "white" }}
+          className="d-flex flex-column align-items-center justify-content-center mt-2"
+          style={{ color: "black" }}
         >
           <Col style={{ marginTop: "20px", textAlign: "center" }}>
-            <h2 style={{ fontSize: "1.5rem", color: "black" }}>
+            <h2 style={{ fontSize: "1.5rem" }}>
               <b>
                 <u>Generated Images Examples</u>
               </b>
