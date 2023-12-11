@@ -1,7 +1,5 @@
-
 .bio {
   color: grey;
-
 }
 
 .container {
@@ -13,16 +11,16 @@
   padding: 20px;
   margin: 30px;
   border-radius: 20px;
-  background-color: rgb(61, 61, 61);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   word-wrap: break-word;
 }
-.edit_btn{
-    margin-top: 15px;
-    background-color: #007AAD;;
-    color: white;
-    width: 50%;
-    font-size: 2rem;
+.edit_btn {
+  margin-top: 15px;
+  background-color: #007aad;
+  color: white;
+  width: 50%;
+  font-size: 2rem;
 }
 /* .btn-primary:hover {
     background-color: #005071;

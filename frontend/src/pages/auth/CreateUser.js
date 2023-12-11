@@ -10,7 +10,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useDatabase } from "../../context/DatabaseContext";
-import Logo from "../../assets/dallegramLogo.png";
+import Logo from "../../assets/dallegramlogo5.png";
 
 export default function CreateUser() {
   const [firstName, setFirstName] = useState();
@@ -74,140 +74,146 @@ export default function CreateUser() {
     <>
       <style type="text/css">
         {`
-    .btn-primary {
-      background-color: #007AAD;
-      color: white;
-     
-    }    
-    .btn-primary:hover{
-      background-color: #005071;
-      color: white;
-    }
-    `}
+          .btn-primary {
+            background-color: #007AAD;
+            color: white;
+          }    
+          .btn-primary:hover {
+            background-color: #005071;
+            color: white;
+          }
+          h3 {
+            color: black;
+            font-size: 1.5rem;
+          }
+          img {
+            width: 250px;
+          }
+          .create-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            color: black;
+          }
+          .form-control {
+            color: black !important;
+          }
+          .btn {
+            color: white;
+          }
+        `}
       </style>
 
-      <div style={{ background: "#383838" }}>
+      <div style={{ background: "#FAF9F6" }}>
         <Container
           className="d-flex flex-column align-items-center justify-content-center"
           style={{ minHeight: "100vh" }}
         >
           <div className="w-100" style={{ maxWidth: "700px" }}>
             <div className="d-flex align-items-center justify-content-center w-100">
-              {/* <img className="mb-4 w-100" src={logo} alt="" /> */}
+              <img src={Logo} alt="Dallegram Logo" />
             </div>
-            {error && (
-              <Alert
-                variant="danger"
-                className="d-flex align-items-center justify-content-center w-100"
+            <div className="create-box">
+              <div className="d-flex align-items-center justify-content-center w-100">
+                <h3>Create your account to start creating!</h3>
+              </div>
+
+              {error && (
+                <Alert variant="danger" className="w-100">
+                  {error}
+                </Alert>
+              )}
+              {success && (
+                <Alert variant="success" className="w-100">
+                  {success}
+                </Alert>
+              )}
+
+              <Form.Group id="firstName" className=" mb-4">
+                <FloatingLabel controlId="floatingInput" label="First Name">
+                  <Form.Control
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    style={{ borderColor: "#000000", borderRadius: "" }}
+                    placeholder="First Name"
+                  />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group id="lastName" className=" mb-4">
+                <FloatingLabel controlId="floatingInput" label="Last Name">
+                  <Form.Control
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                    style={{ borderColor: "#000000", borderRadius: "" }}
+                    placeholder="Last Name"
+                  />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group id="username" className=" mb-4">
+                <FloatingLabel controlId="floatingInput" label="Username">
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    style={{ borderColor: "#000000", borderRadius: "" }}
+                    placeholder="Username"
+                  />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group id="email" className=" mb-4">
+                <FloatingLabel controlId="floatingInput" label="Email">
+                  <Form.Control
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    style={{ borderColor: "#000000", borderRadius: "" }}
+                    placeholder="Email"
+                  />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group id="password" className="mb-4">
+                <FloatingLabel controlId="floatingInput" label="Password">
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={{ borderColor: "#000000", borderRadius: "" }}
+                    placeholder="Password"
+                  />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Button
+                disabled={loading}
+                variant="primary"
+                className="w-100"
+                type="submit"
+                onClick={handleSubmit}
               >
-                {error}
-              </Alert>
-            )}
-            {success && (
-              <Alert
-                variant="success"
-                className="d-flex align-items-center justify-content-center w-100"
-              >
-                {success}
-              </Alert>
-            )}
+                Create Account
+              </Button>
 
-            <div className="d-flex align-items-center justify-content-center w-100">
-              <img src={Logo}></img>
-            </div>
-            <div
-              className="d-flex align-items-center justify-content-center w-100"
-              style={{ color: "white" }}
-            >
-              <h3>Create you account to start creating!</h3>
-            </div>
-
-            <Form.Group id="firstName" className=" mb-4">
-              <FloatingLabel controlId="floatingInput" label="First Name">
-                <Form.Control
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  style={{ borderColor: "#000000", borderRadius: "50px" }}
-                  placeholder="First Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group id="lastName" className=" mb-4">
-              <FloatingLabel controlId="floatingInput" label="Last Name">
-                <Form.Control
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  required
-                  style={{ borderColor: "#000000", borderRadius: "50px" }}
-                  placeholder="Last Name"
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group id="username" className=" mb-4">
-              {" "}
-              {/* email or username? */}
-              <FloatingLabel controlId="floatingInput" label="Username">
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  style={{ borderColor: "#000000", borderRadius: "50px" }}
-                  placeholder="Email"
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group id="email" className=" mb-4">
-              {" "}
-              {/* email or username? */}
-              <FloatingLabel controlId="floatingInput" label="Email">
-                <Form.Control
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  style={{ borderColor: "#000000", borderRadius: "50px" }}
-                  placeholder="Email"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Form.Group id="password" className="mb-4">
-              <FloatingLabel controlId="floatingInput" label="Password">
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  style={{ borderColor: "#000000", borderRadius: "50px" }}
-                  placeholder="Password"
-                />
-              </FloatingLabel>
-            </Form.Group>
-
-            <Button
-              disabled={loading}
-              variant="primary"
-              className="w-100"
-              type="submit"
-              onClick={() => handleSubmit()}
-              style={{ borderRadius: "50px" }}
-            >
-              Create Account
-            </Button>
-
-            <div className="w-100 text-center mt-3">
-              <div className="d-flex flex-row align-items-center justify-content-center">
-                <div className="me-1" style={{ color: "white" }}>
-                  Already have an account?
+              <div className="w-100 text-center mt-3">
+                <div className="d-flex flex-row align-items-center justify-content-center">
+                  <div className="me-1">Already have an account?</div>
+                  <Link to="/login" style={{ color: "#007aad" }}>
+                    Login
+                  </Link>
                 </div>
-                <Link to="/login" style={{ color: "#007aad" }}>
-                  Login
-                </Link>
               </div>
             </div>
           </div>

@@ -26,7 +26,7 @@ export default function Homepage() {
       <div
         className="d-flex flex-row align-items-center justify-content-center"
         style={{
-          background: "#383838",
+          background: "#FAF9F6",
           position: "absolute",
           margin: 0,
           width: "100%",

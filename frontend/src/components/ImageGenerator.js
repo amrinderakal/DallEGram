@@ -104,9 +104,13 @@ function ImageGenerator() {
     `}
       </style>
 
-      <Container fluid style={{ marginLeft: "70px" }}>
-        <Row className="mt-1" style={{ color: "white" }}>
-          <Col xs={12} className="mt-1 mb-1" style={{ paddingTop: "60px" }}>
+      <Container fluid style={{ marginLeft: "70px", color: "black" }}>
+        <Row className="mt-1" style={{ color: "black" }}>
+          <Col
+            xs={12}
+            className="mt-1 mb-1"
+            style={{ paddingTop: "60px", color: "black", fontWeight: "bold" }}
+          >
             <p>Start with a detailed description</p>
           </Col>
           <Col xs={8} md={8} className="mt-1 mb-1">

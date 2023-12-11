@@ -9,17 +9,22 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
-import Logo from "../assets/dallegramLogo.png";
+import Logo from "../assets/dallegramlogo6.png";
 
 function NavigationBar() {
   const { logout } = useAuth();
 
   const navbarStyle = {
-    backgroundColor: "#fff", // Your desired hex color
+    backgroundColor: "#000", // Your desired hex color
+  };
+
+  const navLinkStyle = {
+    color: "#fff", // White color
+    fontWeight: "", // Bold text
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" style={navbarStyle} variant="light">
+    <Navbar collapseOnSelect expand="lg" style={navbarStyle} variant="dark">
       <Container fluid>
         <Navbar.Brand href="/homepage">
           <img
@@ -33,12 +38,12 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/homepage">Public Feed</Nav.Link>
-            <Nav.Link href="/image-generator-page">Image Generator</Nav.Link>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link href="/about-us">About Us</Nav.Link>
+            <Nav.Link href="/homepage" style={navLinkStyle}>Public Feed</Nav.Link>
+            <Nav.Link href="/image-generator-page" style={navLinkStyle}>Image Generator</Nav.Link>
+            <Nav.Link href="/profile" style={navLinkStyle}>Profile</Nav.Link>
+            <Nav.Link href="/about-us" style={navLinkStyle}>About Us</Nav.Link>
             {/* Need to call firebase logout function */}
-            <Nav.Link href="/" onClick={() => logout()}>
+            <Nav.Link href="/" onClick={() => logout()} style={navLinkStyle}>
               Logout
             </Nav.Link>
           </Nav>

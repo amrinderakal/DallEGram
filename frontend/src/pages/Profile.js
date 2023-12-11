@@ -31,7 +31,7 @@ export default function Homepage() {
       <NavigationBar />
       <div
         style={{
-          background: "#383838",
+          background: "#faf9f6",
         }}
       >
         <div class="main-container">

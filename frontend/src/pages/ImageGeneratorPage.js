@@ -13,7 +13,7 @@ export default function ImageGeneratorPage() {
 
       <div
         style={{
-          background: "#383838",
+          background: "#faf9f6",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
@@ -27,7 +27,7 @@ export default function ImageGeneratorPage() {
           style={{ color: "white" }}
         >
           <Col style={{ marginTop: "20px", textAlign: "center" }}>
-            <h2 style={{ fontSize: "1.5rem" }}>
+            <h2 style={{ fontSize: "1.5rem", color: "black" }}>
               <b>
                 <u>Generated Images Examples</u>
               </b>
