@@ -4,6 +4,9 @@ import { useAuth } from "../context/AuthContext";
 import NavigationBar from "../components/NavigationBar";
 import alaka from "../assets/alaka.png";
 import shehneel from "../assets/shehneel.png";
+import aman from "../assets/aman.png";
+import amrinder from "../assets/amrinder.png";
+import pavan from "../assets/pavan.png";
 
 export default function Homepage() {
   const teamMembers = [
@@ -14,20 +17,17 @@ export default function Homepage() {
     },
     {
       name: "Amrinderpal Akal",
-      imageSrc:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      imageSrc: amrinder,
       description: "Product Owner",
     },
     {
       name: "Pavan Patel",
-      imageSrc:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      imageSrc: pavan,
       description: "Developer",
     },
     {
       name: "Aman Karangutkar",
-      imageSrc:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      imageSrc: aman,
       description: "Developer",
     },
     {
@@ -129,4 +129,3 @@ export default function Homepage() {
     </>
   );
 }
-
