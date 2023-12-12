@@ -50,7 +50,7 @@ function ImageGenerator() {
 
     try {
       setIsLoading(true);
-
+      const imageURL = await handleUploadImage();
       const response = await fetch(
         "http://localhost:8000/add_image_to_feed_collection",
         {
@@ -60,7 +60,7 @@ function ImageGenerator() {
           },
           body: JSON.stringify({
             uid: currentUser.uid,
-            imageURL: result,
+            imageURL: imageURL,
             caption: caption,
             username: user.username,
             profilePic: user.profilePic,
@@ -78,6 +78,29 @@ function ImageGenerator() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleUploadImage = async () => {
+    // Replace 'YOUR_UPLOAD_PRESET' with your Cloudinary upload preset
+    const upload_preset = "u5gz8hhv";
+    let pic = null;
+    // Simulate selecting a file (you can get the file from an input field or another source)
+    const uploadBody = new FormData();
+    uploadBody.append("file", result);
+    uploadBody.append("upload_preset", upload_preset);
+    uploadBody.append("cloud_name", "davhdgfz4");
+
+    await fetch("  https://api.cloudinary.com/v1_1/davhdgfz4/image/upload", {
+      method: "post",
+      body: uploadBody,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("File uploaded:" + data.url);
+        pic = data.url;
+      })
+      .catch((err) => console.log(err));
+    return pic;
   };
 
   // Downloads the generated image onto the users local computer
