@@ -11,6 +11,7 @@ export default function CreateUser() {
   const [success, setSuccess] = useState("");
   const { resetPassword } = useAuth(); // change
 
+  // Creates and error response to display
   const createErrorResponse = (err) => {
     const res = err.code;
     switch (res) {
@@ -22,6 +23,7 @@ export default function CreateUser() {
     }
   };
 
+  // Sends an email to the user to reset theri password when the submit button is clicked
   async function handleSubmit(e) {
     // e.preventDefault();
     // resetPassword --> why don't we need to send password?

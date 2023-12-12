@@ -28,31 +28,26 @@ export function AuthProvider({ children }) {
     getImagesForProfile,
   } = useDatabase();
 
+  // calls Firebase to sign a user uo
   function signup(email, password) {
     const signup = createUserWithEmailAndPassword(auth, email, password);
     return signup;
   }
 
+  // calls Firebase to login a user
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-
+  // calls Firebase to logout a user
   function logout() {
     return auth.signOut();
   }
-
+  // calls Firebase to help a user reset thier password
   function resetPassword(email) {
     return sendPasswordResetEmail(auth, email);
   }
 
-  // function updateEmail(email) {
-  //   return currentUser.updateEmail(email);
-  // }
-
-  // function updatePassword(password) {
-  //   return currentUser.updatePassword(password);
-  // }
-
+  // On render of the webpage, we get the images for the feed, the feed in the profile, and the user
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);

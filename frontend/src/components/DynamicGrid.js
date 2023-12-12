@@ -6,6 +6,7 @@ import "../styles/grid.css";
 import { useEffect } from "react";
 
 function DynamicGrid({ feedImages }) {
+  // Takes a timestamp and formats it
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleString();

@@ -17,8 +17,10 @@ export default function Homepage() {
 
   const [show, setShow] = useState(false);
 
+  // Show modal if edit button is clicked
   const handleShow = () => setShow(true);
 
+  // Default to login page if no user logged in
   const navigate = useNavigate();
   useEffect(() => {
     if (!currentUser) {

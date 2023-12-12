@@ -14,6 +14,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { updateUID } = useDatabase();
 
+  // Logs a user in when the submit button is clicked
   async function handleSubmit() {
     try {
       setError("");

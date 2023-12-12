@@ -19,11 +19,13 @@ function ImageGenerator() {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false); // Use a separate state for the modal
 
+  // API keys for OpenAI
   const openai = new OpenAI({
     apiKey: process.env.REACT_APP_API_KEY,
     dangerouslyAllowBrowser: true, // IDK ABOUT THIS
   });
 
+  // Call the openAI API to generate images with Dalle
   const handleGenerate = async () => {
     try {
       setLoading(true);
@@ -42,6 +44,7 @@ function ImageGenerator() {
     }
   };
 
+  // Posts the image generated to the feed
   const handlePostButtonClick = async (result, currentUser, user, caption) => {
     setShowModal(false);
 
@@ -77,6 +80,7 @@ function ImageGenerator() {
     }
   };
 
+  // Downloads the generated image onto the users local computer
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = result;
@@ -179,7 +183,11 @@ function ImageGenerator() {
                 thumbnail
                 src={result}
                 alt="result"
-                style={{ width: "50%", height: "75%", border: "2px solid black"}}
+                style={{
+                  width: "50%",
+                  height: "75%",
+                  border: "2px solid black",
+                }}
               />
             </Col>
           </Row>

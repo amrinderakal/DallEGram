@@ -6,6 +6,7 @@ const uuid = require("uuid");
 const client = new MongoClient(uri);
 client.connect;
 
+// Inserts a user into the user collection
 async function insertOneUser(fName, lName, uid, email, username) {
   try {
     // await client.connect();
@@ -30,6 +31,7 @@ async function insertOneUser(fName, lName, uid, email, username) {
   }
 }
 
+// Gets a user by their username
 async function getUserByUsername(username) {
   let user = null;
   try {
@@ -43,6 +45,7 @@ async function getUserByUsername(username) {
   return user;
 }
 
+// Inserts an object into the feed collection
 async function insertIntoFeedCollection(
   uid,
   imageURL,
@@ -73,6 +76,7 @@ async function insertIntoFeedCollection(
   }
 }
 
+// Updates a users UID based on the email provided
 async function updateUID(email, uid) {
   if (typeof uid != "boolean") {
     try {
@@ -98,6 +102,7 @@ async function updateUID(email, uid) {
   }
 }
 
+//Updates a user's information based on the infromation provided
 async function updateProfile(uid, fName, lName, username, bio, profilePic) {
   try {
     //await client.connect();
@@ -149,6 +154,7 @@ async function updateProfile(uid, fName, lName, username, bio, profilePic) {
   //need to also change the username in the feeds aswell
 }
 
+// Adds a image url to the uesr provided
 async function addImageToUser(uid, imageURL, public) {
   try {
     //await client.connect();
@@ -166,6 +172,7 @@ async function addImageToUser(uid, imageURL, public) {
   }
 }
 
+// Gets the user obect from the user collection based on the uid given
 async function getUser(uid) {
   let user = null;
   try {
@@ -186,6 +193,7 @@ async function getUser(uid) {
   return user;
 }
 
+// Gets all objects in the feed collection
 async function getImagesForFeed() {
   let images = null;
   try {
@@ -194,7 +202,7 @@ async function getImagesForFeed() {
     const collection = db.collection("feed");
     images = await collection.find({}).sort({ timestamp: -1 }).toArray();
     //images = await collection.find({}).toArray(function (err, results) {
-      //images = results;
+    //images = results;
     //});
     // do something if there is not user
   } catch (err) {
@@ -206,6 +214,7 @@ async function getImagesForFeed() {
   return images;
 }
 
+// Gets all objects in the feed collection based on the UID given
 async function getImagesForProfileFeed(uid) {
   let images = null;
   try {
@@ -213,11 +222,14 @@ async function getImagesForProfileFeed(uid) {
     const db = client.db("dallegram");
     const collection = db.collection("feed");
     //images = await collection
-      //.find({ uid: uid })
-      //.toArray(function (err, results) {
-        //images = results;
-      //});
-    images = await collection.find({ uid: uid }).sort({ timestamp: -1 }).toArray();
+    //.find({ uid: uid })
+    //.toArray(function (err, results) {
+    //images = results;
+    //});
+    images = await collection
+      .find({ uid: uid })
+      .sort({ timestamp: -1 })
+      .toArray();
 
     // do something if there is not user
   } catch (err) {
@@ -229,6 +241,7 @@ async function getImagesForProfileFeed(uid) {
   return images;
 }
 
+// Deletes a post from the feed collection
 async function deletePost(userUid, postId) {
   try {
     //await client.connect();
@@ -246,6 +259,7 @@ async function deletePost(userUid, postId) {
   }
 }
 
+// Adds a like from a object in the feed collection
 async function updateLikes(postId, uid) {
   try {
     //await client.connect();
@@ -260,7 +274,7 @@ async function updateLikes(postId, uid) {
     //await client.close();
   }
 }
-
+// Reomves a like from a object in the feed collection
 async function removeLikes(postId, uid) {
   try {
     // await client.connect();

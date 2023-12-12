@@ -43,6 +43,7 @@ function ModalComponent({
     setBio(currBio);
   }, [currFname, currLname, currUsername, currBio]);
 
+  // Closes the modal
   const handleClose = () => {
     setShow(false);
     setFirstName(currFname);
@@ -51,8 +52,11 @@ function ModalComponent({
     setBio(currBio);
     setError("");
   };
+
+  // Creates a delay
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  // Updates the users profile
   const onUpdateProfileClick = async (e) => {
     e.target.disabled = true;
     // if user is not trying to update thier username then no need to check wether if the same username exists
@@ -121,7 +125,6 @@ function ModalComponent({
           );
         }
         await delay(2000);
-        // Need to update the current user
         await getUser(user.uid);
         await getImagesForProfile(user.uid);
         await getImgagesForTheFeed();
@@ -130,6 +133,8 @@ function ModalComponent({
       }
     }
   };
+
+  // Uploads an image to cloudinary
   const handleUploadImage = async () => {
     // Replace 'YOUR_UPLOAD_PRESET' with your Cloudinary upload preset
     const upload_preset = "u5gz8hhv";

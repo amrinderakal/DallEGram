@@ -25,6 +25,8 @@ export default function CreateUser() {
   const { addUser, checkUsernameExists } = useDatabase();
 
   const nav = useNavigate();
+
+  // Creates and error response to display
   const createErrorResponse = (err) => {
     const res = err.code;
     switch (res) {
@@ -39,6 +41,7 @@ export default function CreateUser() {
     }
   };
 
+  // Creates a user when the submit button is clicked
   async function handleSubmit(e) {
     //e.preventDefault();
 

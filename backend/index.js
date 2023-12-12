@@ -8,7 +8,6 @@ require("dotenv").config();
 app.use(cors());
 app.use(bodyParser.json());
 
-//  ALL GET ROUTES
 // finds user based on UID and sends the user as a response
 app.get("/get_user/:uid", async (req, res) => {
   try {
@@ -21,6 +20,7 @@ app.get("/get_user/:uid", async (req, res) => {
   }
 });
 
+// Gets all object in the feed collection
 app.get("/get_images_for_feed", async (req, res) => {
   try {
     const images = await dbConnection.getImagesForFeed();
@@ -31,6 +31,7 @@ app.get("/get_images_for_feed", async (req, res) => {
   }
 });
 
+// Gets all objects in the feed collection where the UID is the uid provided
 app.get("/get_images_for_profile_feed/:uid", async (req, res) => {
   try {
     var user_uid = req.params["uid"];
@@ -42,6 +43,7 @@ app.get("/get_images_for_profile_feed/:uid", async (req, res) => {
   }
 });
 
+// Adds a user to the user collection
 app.post("/add_user", async (req, res) => {
   try {
     const user = req.body;
@@ -67,6 +69,7 @@ app.post("/add_user", async (req, res) => {
   }
 });
 
+// Checks if a username exists in the user collections
 app.get("/check_username/:username", async (req, res) => {
   try {
     const username = req.params.username;
@@ -77,10 +80,6 @@ app.get("/check_username/:username", async (req, res) => {
   }
 });
 
-// ALL POST ROUTES
-// adds a user to the user collection
-
-// ALL PUT Routes
 // updated the uid of a uses based on email
 app.put("/update_uid", (req, res) => {
   try {
@@ -111,21 +110,6 @@ app.put("/update_profile", (req, res) => {
   }
 });
 
-// adds a image id to a user based on uid
-// app.put("/add_image", (req, res) => {
-//   try {
-//     console.log(req.body);
-//     dbConnection.addImageToUser(
-//       req.body.uid,
-//       req.body.imageURL,
-//       req.body.public
-//     );
-//     res.status(201).send("Image Added");
-//   } catch {
-//     res.status(500).send("Server error");
-//   }
-// });
-
 // adds an image to the post collection
 app.post("/add_image_to_feed_collection", async (req, res) => {
   try {
@@ -143,6 +127,7 @@ app.post("/add_image_to_feed_collection", async (req, res) => {
   }
 });
 
+// Deleted a post based on the uid and postID
 app.delete("/delete_post/:uid/:postId", async (req, res) => {
   try {
     const userUid = req.params.uid;
@@ -194,26 +179,6 @@ app.put("/remove_likes/:postId", async (req, res) => {
     res.status(500).send("Server error: " + error.message);
   }
 });
-
-//upload image to database
-// app.post("/upload_image", async (req, res) => {
-//   try {
-//     const { uid, imageURL, caption, username } = req.body;
-//     if (!uid || !imageURL || !caption || !username) {
-//       return res.status(400).send("Missing required fields");
-//     }
-//     await dbConnection.insertIntoFeedCollection(
-//       uid,
-//       imageURL,
-//       caption,
-//       username
-//     );
-//     res.status(201).send("Image uploaded successfully");
-//   } catch (error) {
-//     console.error("Error uploading image:", error);
-//     res.status(500).send("Server error: " + error.message);
-//   }
-// });
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${port}`);

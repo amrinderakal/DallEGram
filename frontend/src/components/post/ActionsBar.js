@@ -12,6 +12,8 @@ const ActionsBar = (props) => {
     getImgagesForTheFeed,
     getImagesForProfile,
   } = useDatabase();
+
+  // On render, look to find if the current user has liked the post. If they have setIsLiked as true
   useEffect(() => {
     const likedUIDs = props.likes;
     if (likedUIDs) {
@@ -23,6 +25,7 @@ const ActionsBar = (props) => {
     }
   }, []);
 
+  // On Button click update wether the user has liked or no lked the image
   const likeButtonClick = async () => {
     if (liked) {
       setIsLiked(false);

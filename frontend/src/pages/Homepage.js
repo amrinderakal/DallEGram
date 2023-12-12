@@ -14,6 +14,7 @@ export default function Homepage() {
   const { uid } = useAuth();
   const navigate = useNavigate();
 
+  // If to user is logged in default to the login page
   useEffect(() => {
     if (!currentUser) {
       navigate("/login");
