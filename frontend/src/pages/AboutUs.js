@@ -10,7 +10,7 @@ export default function Homepage() {
     {
       name: "Shehneel Ashraf",
       imageSrc: shehneel,
-      description: "Shehneel is a senior at Rutgers University studying computer science and creative writing. She has enjoyed working on this project because she gained a lot of frontend development experience. Post graduation, Shehneel plans on working at Bank of America as a software engineer.",
+      description: "Scrum Master",
     },
     {
       name: "Amrinderpal Akal",
@@ -33,7 +33,7 @@ export default function Homepage() {
     {
       name: "Alaka Rajesh",
       imageSrc: alaka,
-      description: "Alaka is a senior at Rutgers University studying computer science and data science. She is graduating in December, and is excited for life after college!",
+      description: "Developer",
     },
   ];
 
