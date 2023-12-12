@@ -2,14 +2,15 @@ import React from "react";
 import { Col, Image, Row, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import NavigationBar from "../components/NavigationBar";
+import alaka from "../assets/alaka.png";
+import shehneel from "../assets/shehneel.png";
 
 export default function Homepage() {
   const teamMembers = [
     {
       name: "Shehneel Ashraf",
-      imageSrc:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-      description: "Scrum Master",
+      imageSrc: shehneel,
+      description: "Shehneel is a senior at Rutgers University studying computer science and creative writing. She has enjoyed working on this project because she gained a lot of frontend development experience. Post graduation, Shehneel plans on working at Bank of America as a software engineer.",
     },
     {
       name: "Amrinderpal Akal",
@@ -31,9 +32,8 @@ export default function Homepage() {
     },
     {
       name: "Alaka Rajesh",
-      imageSrc:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-      description: "Developer",
+      imageSrc: alaka,
+      description: "Alaka is a senior at Rutgers University studying computer science and data science. She is graduating in December, and is excited for life after college!",
     },
   ];
 
@@ -129,3 +129,4 @@ export default function Homepage() {
     </>
   );
 }
+
