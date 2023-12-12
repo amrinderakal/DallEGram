@@ -58,17 +58,15 @@ function ModalComponent({
     // if user is not trying to update thier username then no need to check wether if the same username exists
     if (username == currUsername) {
       if (profilePic) {
-        await handleUploadImage();
-        await delay(2000);
-        window.location.reload();
-        console.log("ProfilePic URL" + profilePicUrl);
+        const profP = await handleUploadImage();
+        console.log("ProfilePic URL" + profP);
         await updateProfileInformation(
           user.uid,
           firstName,
           lastName,
           username,
           bio,
-          profilePicUrl
+          profP
         );
       } else {
         await updateProfileInformation(
@@ -90,7 +88,6 @@ function ModalComponent({
 
       setError("");
       setShow(false);
-      window.location.reload();
     } else {
       //check if username is already in use
       const existingUser = await checkUsernameExists(username);
@@ -103,16 +100,15 @@ function ModalComponent({
       } else {
         // if username not in use, update all profile information
         if (profilePic) {
-          await handleUploadImage();
-          await delay(3000);
-          console.log("ProfilePic URL" + profilePicUrl);
+          const profP = await handleUploadImage();
+          console.log("ProfilePic URL" + profP);
           await updateProfileInformation(
             user.uid,
             firstName,
             lastName,
             username,
             bio,
-            profilePicUrl
+            profP
           );
         } else {
           await updateProfileInformation(
@@ -124,21 +120,20 @@ function ModalComponent({
             currProfilePic
           );
         }
-        await delay(1000);
+        await delay(2000);
         // Need to update the current user
         await getUser(user.uid);
         await getImagesForProfile(user.uid);
         await getImgagesForTheFeed();
         setError("");
         setShow(false);
-        window.location.reload();
       }
     }
   };
   const handleUploadImage = async () => {
     // Replace 'YOUR_UPLOAD_PRESET' with your Cloudinary upload preset
     const upload_preset = "u5gz8hhv";
-
+    let pic = null;
     // Simulate selecting a file (you can get the file from an input field or another source)
     const uploadBody = new FormData();
     uploadBody.append("file", profilePic);
@@ -150,11 +145,12 @@ function ModalComponent({
       body: uploadBody,
     })
       .then((resp) => resp.json())
-      .then(async (data) => {
+      .then((data) => {
         console.log("File uploaded:" + data.url);
-        await setProfilePicUrl(data.url);
+        pic = data.url;
       })
       .catch((err) => console.log(err));
+    return pic;
   };
 
   return (
